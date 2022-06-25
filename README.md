@@ -41,11 +41,11 @@ ReScript.
 
 ### Why ReasonML?
 
-ReScript being young, might continue to veer further towards JavaScript to do
-and spin off into something different from ReasonML or OCaml. No doubt, ReScript
-might become a useful and popular language but the JavaScript ecosystem is
-enormous with many languages compiling to JavaScript such as *ClojureScript*,
-*Elm*, *PureScript*, *Dart* and *TypeScript*.
+ReScript being young, might continue to veer further towards JavaScript and spin
+off into something different from ReasonML or OCaml. No doubt, ReScript might
+become a useful and popular language but the JavaScript ecosystem is enormous
+with many languages compiling to JavaScript such as *ClojureScript*, *Elm*,
+*PureScript*, *Dart* and *TypeScript*.
 
 ReasonML seems to remain close to OCaml. It has the necessary JavaScript
 interoperability and has *Reason React*. Being adopted by companies for frontend
@@ -73,12 +73,63 @@ Choosing ReasonML over ReScript itself took quite a while.
 Lets get started! ([Awesome
 ReasonML](https://github.com/vramana/awesome-reasonml) may be a good place to
 start.)
-
+    
 ## Starter kit
 
-Being newbies, lets use a starter kit.
+Being newbies, lets use a starter app: [github.com/yawaramin/fullstack-reason](https://github.com/yawaramin/fullstack-reason)
 
-# Notable links
+# Learning ReasonML
+
+## bs-platform
+
+For learning, we use an older BuckleScript version to match our learning material.
+
+    npm i bs-platoform@7.3.2
+
+## Revision - ReasonML language 
+
++ See Pervasives (sqrt, sin, cost) (In the browser we also have Js.Math)
++ Js.log, Js.Math.,Js.String
++ if/else is an expr (returns something) Hence it always needs an else.
++ the terenary operator also works.
++ + +. ++
++ "ascii str", 'char', {js|unicode multi-line string|js}, {j|total $total|j}
++ [%%raw {||}]  [%raw {||}]
++ -> (pipe-first for data-first) (data-first: good for type inferencing langs)
++ |> (reverse pipe)
++ _ pipe placeholder (data-first is inconvenient for partial application)
++ Punning (for records, like in JS obj {a})
++ list [1,2,3]  array [|1,2,3|]
++ labeled args (~arg1, ~arg2) (~arg1 as a1, ~arg2) (~arg1, ~arg2=?, ())
++ destructuring tuples, records
++ Instead of default values for fn params, use currying with labeled params.
++ Invariants, option, Some, None
++ Belt is the BuckleScript standard library
++ (Belt.Option.flatMap())  and Belt.Option.map()
+
+## Revision - commands
+
++ bsb -init prj -theme basic-reason
++ bsb -themes
++ npm run build
++ npm run start
+
+# Random notes
+
++ js_of_ocaml (existing before BuckleScript) does OCaml bytecode to JavaScript,
+  facilitating use of OCaml libraries.
++ ReScript does rawlambda to JavaScript generating readable JavaScript.
++ BuckleScript was initially used to compile either vanilla OCaml or
+  ReasonML to JavaScript. At some point, BuckleScript which was rebranded as
+  ReScript developed its own syntax.
+
+# Links
+
+## Links - language
+
++ [data-first-and-data-last-a-comparison/](https://www.javierchavarri.com/data-first-and-data-last-a-comparison/)
+
+## Links - ecosystem
 
 + [Awesome ReasonML](https://github.com/vramana/awesome-reasonml)
 + [An Invitation to
@@ -93,13 +144,3 @@ Being newbies, lets use a starter kit.
 + [About bucklescript](https://discuss.ocaml.org/t/about-bucklescript/178)
   (ReasonML author) 
 
-# Notes
-
-Random notes for my reference.
-
-+ js_of_ocaml (existing before BuckleScript) does OCaml bytecode to JavaScript,
-  facilitating use of OCaml libraries.
-+ ReScript does rawlambda to JavaScript generating readable JavaScript.
-+ BuckleScript was initially used to compile either vanilla OCaml or
-  ReasonML to JavaScript. At some point, BuckleScript which was rebranded as
-  ReScript developed its own syntax.
