@@ -1,25 +1,29 @@
 # ML-Select
 
-This is an HTML widget like...
+This is an HTML widget like an HTML `<select>` *+* auto complete
 
-HTML `<select>` *+* auto complete
+The steps taken to develop this widget are below. This was done to try and
+explain the thought process instead of just providing the code.
 
-Not meant to be a libary, this is an exercise in exploring the *OCaml* based
-*ReasonML* and *ReScript* for frontend web development.
+# ReasonML and ReScript
+
+The purpose of making this widget is to explore the **OCaml** based **ReasonML**
+and **ReScript** for frontend web development.
+
+Hence this is not a production ready library.
 
 We won't discuss OCaml and its advantages but focus on exploring the ecosystem
 and building the widget.
-
-# ReasonML and ReScript
 
 We start out knowing nothing about ReasonML or ReScript.
 
 ## Choosing between ReScript & ReasonML
 
-ReScript promotes its own Syntax, veering towards JavaScript. I would prefer to
-stay closer to OCaml but ReScript has gained a lot of traction. Because of
-tooling support it might be easier for a newbie to start with ReScript and later
-try ReasonML to remain closer to OCaml.
+As ReScript seems to have its own syntax deviating from OCaml, it might be
+better to use ReasonML which deviates less and stays closer to OCaml. However
+ReScript has gained a lot of traction. Because of tooling support it might be
+easier for a newbie to start with ReScript and later try ReasonML to remain
+closer to OCaml.
 
 ResonML seems to be loosing traction for frontend web development. I got this
 impression after spending a while surveying the ecosystem and maybe its not
@@ -44,13 +48,13 @@ ReScript.
 ReScript being young, might continue to veer further towards JavaScript and spin
 off into something different from ReasonML or OCaml. No doubt, ReScript might
 become a useful and popular language but the JavaScript ecosystem is enormous
-with many languages compiling to JavaScript such as *ClojureScript*, *Elm*,
-*PureScript*, *Dart* and *TypeScript*.
+with already many popular languages compiling to JavaScript such as
+*ClojureScript*, *Elm*, *PureScript*, *Dart* and *TypeScript*.
 
 ReasonML seems to remain close to OCaml. It has the necessary JavaScript
 interoperability and has *Reason React*. Being adopted by companies for frontend
-development, ReasonML developers have reaped its benefits. Maybe due to the
-changing ecosystem ReasonML teams might have to migrate to ReScript.
+development, it appears that ReasonML developers have reaped its benefits. Maybe
+due to the changing ecosystem ReasonML teams might have to migrate to ReScript.
 
 Owing to the **seemingly** fading away of ReasonML, maybe its not the best
 choice to start a big production level app but I don't know the ecosystem well
@@ -64,7 +68,8 @@ changing requirements.
 
 To each their own.
 
-For now, lets dive into ReasonML and get the feel of OCaml for frontend web dev.
+For now, lets dive into ReasonML to get the feel of OCaml for frontend web dev
+and build the widget.
 
 # Getting started
 
@@ -76,16 +81,18 @@ start.)
 
 ## Learning ReasonML
 
-The next step is to learn ReasonML which we do using `bsb -make-world -w` and
-later use Webpack to integrate ReasonML with a HTML page.
+The first step is to learn ReasonML which we do using `bsb -make-world -w`.
 
 ## BuckleScript compiler
+
+After getting a taste of ReasonML using the bsb compiler, we use Webpack to
+help integrate ReasonML with a HTML page and create a build.
 
 Create a sample project to get started.
 
     bsb -init CountrySelect -theme basic-reason
 
-## Webpack build tool
+## Webpack - Creating `webpack.config.js`
 
 We use webpack to load the compiled ReasonML into HTML.
 
@@ -112,21 +119,38 @@ npm stuff for webpack
     npm install --save-dev webpack-dev-server
     npm install --save-dev html-webpack-plugin
 
-Note: We start out without **bs-css** and use scss. Lets see how this plays with
-our build setup.
+Note: We start out without **bs-css** which we don't know much about yet and try
+to use just scss. Lets see how this works out.
 
 This is a [useful
 article](https://medium.com/@arecvlohe/getting-started-with-reasonreact-f47c9fc3d60a)
-to integrate compiled ReasonML with webpack build tool.
-
-During dev, bsb and webpack will both be watching for changes, we need to two
-concurrent commands for which the npm package `concurrently` can help keep
-things clean.
-
-    npm install --save-dev concurrently
+to integrate code compiled by `bsb` with Webpack.
 
 In bsconfig.js we changed package-specs `module` to `es6-global` and set
 `in-source` to `false`.
+
+During dev, bsb and webpack will both be watching for changes and we need two
+concurrent commands for which npm package `concurrently` is used.
+
+    npm install --save-dev concurrently
+
+Note: There seems to be a [Webpack
+bs-loader](https://www.npmjs.com/package/bs-loader) but its documentation
+recommends using `bsb`.
+
+## Webpack
+
+Now that our webpack setup is complete (see
+[webpack.config.js](./webpack.config.js)) we can run a development server or
+create a build.
+
+To run the dev server:
+
+    npm start
+
+To make a production build:
+
+    npm run build
 
 # Learning ReasonML
 
