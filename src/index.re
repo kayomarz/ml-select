@@ -1,0 +1,3 @@
+let sayHi = () => {
+  "Hi ReasonML";
+}

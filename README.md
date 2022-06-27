@@ -73,10 +73,60 @@ Choosing ReasonML over ReScript itself took quite a while.
 Lets get started! ([Awesome
 ReasonML](https://github.com/vramana/awesome-reasonml) may be a good place to
 start.)
-    
-## Starter kit
 
-Being newbies, lets use a starter app: [github.com/yawaramin/fullstack-reason](https://github.com/yawaramin/fullstack-reason)
+## Learning ReasonML
+
+The next step is to learn ReasonML which we do using `bsb -make-world -w` and
+later use Webpack to integrate ReasonML with a HTML page.
+
+## BuckleScript compiler
+
+Create a sample project to get started.
+
+    bsb -init CountrySelect -theme basic-reason
+
+## Webpack build tool
+
+We use webpack to load the compiled ReasonML into HTML.
+
+Note: Being a newbie, I had considered using [this starter
+app](https://github.com/yawaramin/fullstack-reason) but things worked out fine
+with `bsb -make-world -w` and Webpack and hence didn't need the starter kit.
+
+We follow the [Webpack 5 guide - Getting
+Started](https://webpack.js.org/guides/getting-started/) to use the following
+webpack features:
+
+    + html-webpack-plugin
+    + clean dist dir
+    + css and style loaders
+    + scss
+    + inline-source-map
+    + enviromnents (env.development / env.production)
+
+npm stuff for webpack
+
+    npm install --save-dev webpack webpack-cli
+    npm install --save-dev style-loader css-loader
+    npm install --save-dev sass-loader sass
+    npm install --save-dev webpack-dev-server
+    npm install --save-dev html-webpack-plugin
+
+Note: We start out without **bs-css** and use scss. Lets see how this plays with
+our build setup.
+
+This is a [useful
+article](https://medium.com/@arecvlohe/getting-started-with-reasonreact-f47c9fc3d60a)
+to integrate compiled ReasonML with webpack build tool.
+
+During dev, bsb and webpack will both be watching for changes, we need to two
+concurrent commands for which the npm package `concurrently` can help keep
+things clean.
+
+    npm install --save-dev concurrently
+
+In bsconfig.js we changed package-specs `module` to `es6-global` and set
+`in-source` to `false`.
 
 # Learning ReasonML
 
@@ -92,7 +142,7 @@ For learning, we use an older BuckleScript version to match our learning materia
 + Js.log, Js.Math.,Js.String
 + if/else is an expr (returns something) Hence it always needs an else.
 + the terenary operator also works.
-+ + +. ++
++ `+` `+.` `++`
 + "ascii str", 'char', {js|unicode multi-line string|js}, {j|total $total|j}
 + [%%raw {||}]  [%raw {||}]
 + -> (pipe-first for data-first) (data-first: good for type inferencing langs)
