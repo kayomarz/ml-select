@@ -3,10 +3,25 @@
 This is a *React.js* component which functions like an HTML `<select>` *+* auto
 complete.
 
-Rather than just presenting the code, the steps taken to develop this component,
-and learn the language are described below .
+# Using the component
 
-# ReasonML and ReScript
+# TODOS
+
+1. ReasonML with HTML - DOM interaction using BuckleScript bindings
+2. How to write bindings.
+3. Interact with React.js
+4. Design of CountrySelect.
+   + Create a `Select` component as parent which has all the required
+     functionality. 
+   + `CountrySelect` will be a particular case of `Select`.
+   + Identify invalid user input to be handled correctly.
+5. Bring in a test framework to test as we develop. 
+6. How users can download and use `CountrySelect`.
+
+# Steps taken to build the compoent
+
+The steps taken to develop this component as well as the experience of diving
+into the ReasonML/ReScript ecosystem are also described below.
 
 The purpose of making this component is to explore the **OCaml** based
 **ReasonML** and **ReScript** for frontend web development.
@@ -22,15 +37,15 @@ a lot of traction and seems to have great tooling support.
 Being new to the ecosystem, ReScript seems to be the way forward.
 
 **ReasonML** seems to be loosing traction for frontend web development. I got
-this impression after spending a while surveying the ecosystem and maybe thats
-not completely true.
+this impression after spending a short while surveying the ecosystem and maybe
+thats not completely true.
 
 ReScript seems like the apparent choice forward.
 
 ### Further exploration
 
 After a lot more exploring, I realized that **ReasonML** might be a better
-choice at-least for this task.
+choice, at-least for this task.
 
 The aim of this project is not only to build the component but also to get a
 taste of using OCaml for frontend development.
@@ -185,6 +200,12 @@ learn the basics, we can easily ramp up to the latest tools.
 + destructuring tuples, records
 + Instead of default values for fn params, use currying with labeled params.
 + Invariants, option, Some, None
+
+## Revision - ReasonML bindings
+
++ [@bs.new]
++ [@bs.scope] [@bs.val]
++ [@bs.send]
 
 ## Revision - modules/libraries
 
