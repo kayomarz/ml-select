@@ -89,19 +89,16 @@ goals of the BuckleScript author.
 
 `bsb` helps with creating a sample project.
 
-    bsb -init CountrySelect -theme basic-reason
-
+    bsb -init . -theme basic-reason
 
 ### Webpack - Creating `webpack.config.js`
 
 After getting a taste of ReasonML, we create a Webpack configuration to load the
-compiled JavaScript it an HTML page.
-
-We use webpack to load the compiled ReasonML into HTML.
+compiled output JavaScript into an HTML page.
 
 Note: Being a newbie, I had considered using [this starter
 app](https://github.com/yawaramin/fullstack-reason) but things worked out fine
-with `bsb -make-world -w` and Webpack and hence didn't need the starter kit.
+using `bsb` and Webpack and hence didn't need the starter kit.
 
 We follow the [Webpack 5 guide - Getting
 Started](https://webpack.js.org/guides/getting-started/) to use the following
