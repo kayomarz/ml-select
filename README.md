@@ -141,6 +141,11 @@ Note: There seems to be a [Webpack
 bs-loader](https://www.npmjs.com/package/bs-loader) but its documentation
 recommends using `bsb`.
 
+To avoid the browser console from constantly showing a `404` error due to a
+missing favicon, lets grab one from [favicon.io](https://favicon.io/) licensed
+under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/), update webpack
+config `HtmlWebpackPlugin` with its path.
+
 ## Webpack
 
 With [webpack.config.js](./webpack.config.js) and `scripts` defined in
