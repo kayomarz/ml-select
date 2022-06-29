@@ -60,13 +60,20 @@ Usage:
 
 # Steps taken to build the compoent
 
-The steps taken to develop this component as well as the experience of diving
-into the ReasonML/ReScript ecosystem are also described below.
+The steps taken to develop this component and notes about the language and its
+ecosystem also described below.
 
 The purpose of making this component is to explore the **OCaml** based
 **ReasonML** and **ReScript** for frontend web development.
 
 Hence this is not a production ready library.
+
+## Aspects to learn
+
+1. Ecosystem including build and test tools.
+2. Language features.
+3. How to write bindings such that they take advantage of type safety which
+   ReScript/ReasonML provide.
 
 ## Choosing between ReScript & ReasonML
 
@@ -243,9 +250,38 @@ learn the basics, we can easily ramp up to the latest tools.
 
 ## Revision - ReasonML bindings
 
+For ReasonML to interact with existing JavaScript libraries we need to write
+bindings in ReasonML for that library.
+
+Hence, writing bindings turns out to be an important skill to master in order to
+use existing JavaScript libraries. Bindings should be written such that they
+take advantage of the type safety which ReasonML provides.
+
+For instance, lets say that function of some JavaScript library which we want to
+use in ReasonML expects an `encoding` argument which can either be `ascii` or
+`utf8`. Any other value will cause the JavaScript function to throw an
+exception. To correctly write a binding for such a function, we need to write a
+binding such that the Reason compiler itself allows only the above two
+strings.If we allow ReasonML code to accept any value, our ReasonML code will
+still work but then we need to write code to check for valid values which means
+writing more code and we missing out on this feature provided by ReasonML.
+
+Writing un-necessary lines of code results in a greater effort to maintain it.
+Of course if the arguments being passed to the above function were coming from
+user input, we would still need to write validations.
+
+The best way to learn binding turns out to be practise while observing compiled
+JavaScript code. We could also read bindings of well known JavaScript libraries
+such as ReasonReact so that we learn from (possibly) correct ways of writing
+bindings.
+
+This might take us a while to learn but its worth doing well.
+
++ [@bs.scope]
++ [@bs.val]
 + [@bs.new]
-+ [@bs.scope] [@bs.val]
 + [@bs.send]
+
 
 ## Revision - modules/libraries
 
