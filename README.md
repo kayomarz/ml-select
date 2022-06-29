@@ -5,18 +5,58 @@ complete.
 
 # Using the component
 
+We create a component to let users select from a list of
+countries.
+
+Usage:
+
+    <CountrySelect
+        className="custom-class"
+        country=Some("us")
+        onChange=(country => Js.log(country))
+    />
+
 # TODOS
 
-1. ReasonML with HTML - DOM interaction using BuckleScript bindings
-2. How to write bindings.
-3. Interact with React.js
-4. Design of CountrySelect.
+1. ✓ Explore the ecosystem and language basics.
+2. ✓ ReasonML in the browser - Use webpack to integrate `ReasonML` with `bsb`
+   and do some DOM interaction using existing bindings just to get familiar with
+   ReasonML web dev.
+3. ✓ Explore writing bindings.
+4. Bring in a test framework to test as we develop.
+   + How do we write tests for bindings?
+5. Interact with React.js
+   + ✓ Initially use existing bindings and get familiar with ReasonML and
+     React.js . ie. using `ReasonReact`
+   + Bring in `React-Select` (via npm), write our own bindings.
+   + Complete the `<CountrySelect/>` component (ie. all steps below)
+   + Try to remove `ReasonReact` and write our own bindings.
+6. Interface:
+   `<CountrySelect
+      className="custom-class"
+      country=Some("us")
+      onChange=(country => Js.log(country))
+    />`
+7. CountrySelect functionality
+   + `React-select` should fetch countries from the server.
    + Create a `Select` component as parent which has all the required
-     functionality. 
-   + `CountrySelect` will be a particular case of `Select`.
-   + Identify invalid user input to be handled correctly.
-5. Bring in a test framework to test as we develop. 
-6. How users can download and use `CountrySelect`.
+     functionality.
+   + `CountrySelect` will then use `Select`.
+   + Handle invalid user input. i.e. what if a user types an option which does
+     not exist and hits enter.
+   + Ensure all keyboard shortcuts work (open/close dropdown, navigate and
+     select options, cancel choice with keyboard)
+   + The search filter is internal. It filters countries by name without case
+     sensitivity.
+   + Select renders only visible options; it is not slow on opening.
+8. Styling
+   + Explore `Sketch-fie` and `flag-icon-css`
+   + Decide if we can use `scss` or explore what `bs-css` is all about. Is it a
+     de-factor to work with ReasonML?
+   + Do the styling.
+9. How to distribute the react `<CountrySelect/>` component. Also make the
+   parent `<Select/>` available so that it can be used with other content.
+10. Deploy a live example of `<CountrySelect/>`
 
 # Steps taken to build the compoent
 
