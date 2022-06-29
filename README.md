@@ -29,8 +29,9 @@ Usage:
    + ✓ Initially use existing bindings and get familiar with ReasonML and
      React.js . ie. using `ReasonReact`
    + Bring in `React-Select` (via npm), write our own bindings.
-   + Complete the `<CountrySelect/>` component (ie. all steps below)
-   + Try to remove `ReasonReact` and write our own bindings.
+   + Complete the `<CountrySelect/>` component ie. the rest of the steps below
+     and then try to remove `ReasonReact` and write our own bindings for
+     React.js.
 6. Interface:
    `<CountrySelect
       className="custom-class"
@@ -87,7 +88,7 @@ Being new to the ecosystem, ReScript seems to be the way forward.
 this impression after spending a short while surveying the ecosystem and maybe
 thats not completely true.
 
-ReScript seems like the apparent choice forward.
+On the whole, **ReScript** seems to be the apparent choice.
 
 ### Further exploration
 
@@ -105,11 +106,9 @@ important step to choose between ReasonML and ReScript.
 
 **ReScript** being young, might continue to veer further towards JavaScript and
 spin off into something different from ReasonML or OCaml. No doubt, ReScript
-might become a great language but the JavaScript ecosystem is enormous with
-popular languages compiling to JavaScript such as *ClojureScript*, *Elm*,
-*PureScript*, *Dart* and *TypeScript*.
-
-One of our aim is to use **OCaml** or a dialect for frontend development.
+might become a great language but the JavaScript ecosystem is enormous with many
+languages compiling to JavaScript such as *ClojureScript*, *Elm*, *PureScript*,
+*Dart* and *TypeScript*.
 
 Although the above is just speculation but we also have **ReasonML** which seems to
 remain close to OCaml, has the necessary JavaScript interoperability and has
@@ -118,9 +117,11 @@ developers seem have reaped its benefits and had a pleasant development
 experience. Maybe due to the changing ecosystem ReasonML teams might have to
 migrate to ReScript.
 
-Owing to the **seemingly** fading away of ReasonML, maybe its not the best
-choice to start a big production level app using ReasonML but I don't yet know
-the ecosystem well enough to make this decision.
+One of our aims is to use **OCaml** or a dialect for frontend development.
+
+Owing to fading away of ReasonML or so it **seems**, maybe its not the best
+choice to start a production level app using ReasonML but I don't yet know the
+ecosystem well enough to make this decision.
 
 Eventually we want to write correct and readable code in an expressive
 language. We also need to churn out top-notch apps despite their changing
@@ -132,24 +133,22 @@ For this task, lets use **ReasonML** and get a feel of OCaml for frontend dev.
 
 # Getting started
 
-Choosing ReasonML over ReScript itself took quite a while.
+Choosing ReasonML over ReScript itself took quite a while. Lets get started!
+([Awesome ReasonML](https://github.com/vramana/awesome-reasonml) maybe a good
+place to start.)
 
-Lets get started! ([Awesome
-ReasonML](https://github.com/vramana/awesome-reasonml) maybe a good place to
-start.)
+## Exploring ReasonML
 
-## Learning ReasonML
-
-The first step is to learn ReasonML.
+We need to install a compiler and explore the language.
 
 ### BuckleScript compiler
 
-To experiment we used the BuckleScript
-command `bsb -make-world -w` to compile ReasonML, ran the code using node and
-observed the compiled JavaScript which is indeed readable, being also one of the
-goals of the BuckleScript author.
+To experiment we use the BuckleScript command `bsb -make-world -w` to compile
+ReasonML, run the code using node and observe the compiled JavaScript which is
+indeed readable the latter of which was one of the goals of the BuckleScript
+author.
 
-`bsb` helps with creating a sample project.
+Note: `bsb` helps with creating a sample project.
 
     bsb -init . -theme basic-reason
 
@@ -197,13 +196,14 @@ concurrent commands for which npm package `concurrently` is used.
     npm install --save-dev concurrently
 
 Note: There seems to be a [Webpack
-bs-loader](https://www.npmjs.com/package/bs-loader) but its documentation
-recommends using `bsb`.
+bs-loader](https://www.npmjs.com/package/bs-loader) but its in maintenance mode
+and the documentation recommends using `bsb` with its `.bs.js` extension which is
+what we are doing.
 
-To avoid the browser console from constantly showing a `404` error due to a
-missing favicon, lets grab one from [favicon.io](https://favicon.io/) licensed
-under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/), update webpack
-config `HtmlWebpackPlugin` with its path.
+To avoid the browser console from constantly showing a `404` due to a missing
+favicon, lets grab one from [favicon.io](https://favicon.io/) licensed under
+[CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/), update webpack config
+`HtmlWebpackPlugin` with its path.
 
 ## Webpack
 
@@ -221,15 +221,15 @@ To make a production build:
 
 # Learning ReasonML
 
-There seem to be very good quality learning resources for ReasonML which are a
-couple of years old. Since everything is new to us, we will these older learning
+There seem to be good quality learning resources for ReasonML which are a couple
+of years old. Since everything is new to us, we will these older learning
 materials along with the older BuckleScript versions which they refer to. This
 is why `bs-platform` in the [package.json](./package.json) is an older version
 while the current version is *9.0.2* (28th June 2022)
 
 This way we focus purely on learning and avoid distractions due to changes in
 versions. Besides, the ReasonML language wouldn't have changed much and once we
-learn the basics, we can easily ramp up to the latest tools.
+learn the basics, we can easily ramp up to the latest.
 
 ## Revision - ReasonML language 
 
@@ -257,31 +257,24 @@ Hence, writing bindings turns out to be an important skill to master in order to
 use existing JavaScript libraries. Bindings should be written such that they
 take advantage of the type safety which ReasonML provides.
 
-For instance, lets say that function of some JavaScript library which we want to
-use in ReasonML expects an `encoding` argument which can either be `ascii` or
-`utf8`. Any other value will cause the JavaScript function to throw an
-exception. To correctly write a binding for such a function, we need to write a
-binding such that the Reason compiler itself allows only the above two
-strings.If we allow ReasonML code to accept any value, our ReasonML code will
-still work but then we need to write code to check for valid values which means
-writing more code and we missing out on this feature provided by ReasonML.
+For instance, lets say a function of some JavaScript library expects an
+`encoding` argument which can either be `ascii` or `utf8`. Any other string will
+cause the JavaScript function to throw an exception. To correctly write a
+binding for such a function, we need to write a binding such that the Reason
+compiler itself allows only the above two strings. If we allow ReasonML code to
+accept any value, our ReasonML code will still work but then we need to write
+code to check for valid values which means writing more code and we missing out
+on this feature provided by ReasonML.
 
-Writing un-necessary lines of code results in a greater effort to maintain it.
-Of course if the arguments being passed to the above function were coming from
-user input, we would still need to write validations.
-
-The best way to learn binding turns out to be practise while observing compiled
-JavaScript code. We could also read bindings of well known JavaScript libraries
-such as ReasonReact so that we learn from (possibly) correct ways of writing
-bindings.
-
-This might take us a while to learn but its worth doing well.
+Writing un-necessary lines of code results needs a greater effort to maintain
+it.  Of course if the arguments being passed to the above function were coming
+from user input, we would still need to write validations.
 
 + [@bs.scope]
 + [@bs.val]
 + [@bs.new]
 + [@bs.send]
-
++ [@bs.module]
 
 ## Revision - modules/libraries
 
