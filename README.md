@@ -3,12 +3,12 @@
 This is a *React.js* component which functions like an HTML `<select>` *+* auto
 complete.
 
-# Using the component
+The purpose of developing this component is to explore the **OCaml** based
+**ReasonML** and **ReScript** for frontend web development.
 
-We create a component to let users select from a list of
-countries.
+Hence it is not meant to be a production ready library.
 
-Usage:
+# Usage
 
     <CountrySelect
         className="custom-class"
@@ -16,22 +16,26 @@ Usage:
         onChange=(country => Js.log(country))
     />
 
-# TODOS
+# Steps taken to build the compoent
 
-1. ✓ Explore the ecosystem and language basics.
-2. ✓ ReasonML in the browser - Use webpack to integrate `ReasonML` with `bsb`
-   and do some DOM interaction using existing bindings just to get familiar with
-   ReasonML web dev.
+We have logged our steps of this entire exercise to describe the thought process
+as well as explain the reasons for some of our design choices.
+
+
+## Todos
+
+1. ✓ Explore the ecosystem and language.
+2. ✓ ReasonML in the browser - Use webpack to integrate `ReasonML` with `bsb`.
 3. ✓ Explore writing bindings.
-4. Bring in a test framework to test as we develop.
-   + How do we write tests for bindings?
+4. ✗ Test for bindings. [This
+   article](https://itnext.io/reasonml-create-bindings-for-npm-package-b8a3c6d0703e#cb5f)
+   describes tests for ReasonML bindings using
+   [@glennsl/bs-jest](https://github.com/glennsl/rescript-jest/tree/v0.3.2)
+   which is marked as experimental. It's not yet clear how to write tests.
 5. Interact with React.js
-   + ✓ Initially use existing bindings and get familiar with ReasonML and
-     React.js . ie. using `ReasonReact`
-   + Bring in `React-Select` (via npm), write our own bindings.
-   + Complete the `<CountrySelect/>` component ie. the rest of the steps below
-     and then try to remove `ReasonReact` and write our own bindings for
-     React.js.
+   + ✓ Initially use existing bindings and get familiar with ReasonReact.
+   + Bring in `React-Select` (via npm), writing our own bindings.
+   + Complete the `<CountrySelect/>` component.
 6. Interface:
    `<CountrySelect
       className="custom-class"
@@ -55,19 +59,9 @@ Usage:
    + Decide if we can use `scss` or explore what `bs-css` is all about. Is it a
      de-factor to work with ReasonML?
    + Do the styling.
-9. How to distribute the react `<CountrySelect/>` component. Also make the
-   parent `<Select/>` available so that it can be used with other content.
-10. Deploy a live example of `<CountrySelect/>`
-
-# Steps taken to build the compoent
-
-The steps taken to develop this component and notes about the language and its
-ecosystem also described below.
-
-The purpose of making this component is to explore the **OCaml** based
-**ReasonML** and **ReScript** for frontend web development.
-
-Hence this is not a production ready library.
+9. As an exercise on bindings, write our own bindings for the React.js features
+   which we need. i.e. don't use ReasonReact.
+10. Deploy a live demo of `<CountrySelect/>`
 
 ## Aspects to learn
 
@@ -299,11 +293,29 @@ from user input, we would still need to write validations.
   ReasonML to JavaScript. At some point, BuckleScript which was rebranded as
   ReScript developed its own syntax.
 
+# Editor - VS Code
+
+The ReasonML site suggests the
+[vscode-ocaml-platform](https://github.com/ocamllabs/vscode-ocaml-platform)
+(**VSCode OCaml Platform**) extension for Visual Studio Code.
+
+Prerequisites
+
+Before installing the extension, install:
+
+    opam install ocaml-lsp-server
+    opam install ocamlformat # May not need this, but who knows.
+    
+Next, install the extension.
+
+
 # Links
 
 ## Links - language
 
 + [data-first-and-data-last-a-comparison/](https://www.javierchavarri.com/data-first-and-data-last-a-comparison/)
++ [ReasonML bindings](https://itnext.io/reasonml-create-bindings-for-npm-package-b8a3c6d0703e)
++ [A first ReasonReact app](https://jamesfriend.com.au/a-first-reason-react-app-for-js-developers)
 
 ## Links - ecosystem
 
