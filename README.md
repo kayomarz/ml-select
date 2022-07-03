@@ -3,10 +3,8 @@
 This is a *React.js* component which functions like an HTML `<select>` *+* auto
 complete.
 
-The purpose of developing this component is to explore the **OCaml** based
-**ReasonML** and **ReScript** for frontend web development.
-
-Hence it is not meant to be a production ready library.
+This is not a production ready library. It is an exercise in exploring **OCaml**
+based **ReasonML** and **ReScript** for frontend web development.
 
 # Usage
 
@@ -18,9 +16,8 @@ Hence it is not meant to be a production ready library.
 
 # Steps taken to build the compoent
 
-We have logged our steps of this entire exercise to describe the thought process
-as well as explain the reasons for some of our design choices.
-
+The rest of this page is a log of the steps required and decisions made while
+developing this component.
 
 ## Todos
 
@@ -34,28 +31,28 @@ as well as explain the reasons for some of our design choices.
    which is marked as experimental. It's not yet clear how to write tests.
 5. Interact with React.js
    + ✓ Initially use existing bindings and get familiar with ReasonReact.
-   + ✓ Write own bindings for basic use of `React-Select` (via npm).
-   + Complete the `<CountrySelect/>` functionality configuring react-select.
+   + ✓ Write bindings for basic use of `React-Select` (via npm).
 6. Interface:
    `<CountrySelect
       className="custom-class"
       country=Some("us")
       onChange=(country => Js.log(country))
     />`
-7. CountrySelect functionality
-   + `React-select` should fetch countries from the server.
-   + Create a `Select` component as parent which has all the required
+7. Complete the functionality
+   + Write bindings for `react-select` required for this component.
+   + Fetch countries from the server.
+   + Create a `MlSelect` general component as parent which has the required
      functionality.
-   + `CountrySelect` will then use `Select`.
+   + `CountrySelect` will then use `MlSelect`.
    + Handle invalid user input. i.e. what if a user types an option which does
      not exist and hits enter.
    + Ensure all keyboard shortcuts work (open/close dropdown, navigate and
      select options, cancel choice with keyboard)
    + The search filter is internal. It filters countries by name without case
      sensitivity.
-   + Select renders only visible options; it is not slow on opening.
+   + Renders only visible options; it is not slow on opening.
 8. Styling
-   + Explore `Sketch-fie` and `flag-icon-css`
+   + Explore `Sketch-file` and `flag-icon-css`
    + Decide if we can use `scss` or explore what `bs-css` is all about. Is it a
      de-factor to work with ReasonML?
    + Do the styling.
@@ -69,49 +66,41 @@ as well as explain the reasons for some of our design choices.
 2. Language features.
 3. How to write bindings such that they take advantage of type safety which
    ReScript/ReasonML provide.
+4. Coding conventions - See [reasonml-style.pdf (cs.brown.edu)](https://cs.brown.edu/courses/cs017/content/docs/reasonml-style.pdf)
 
 ## Choosing between ReScript & ReasonML
 
-As **ReScript** seems to have its own syntax deviating from OCaml, it might be
-better to use ReasonML which stays closer to OCaml. However ReScript has gained
-a lot of traction and seems to have great tooling support.
-
-Being new to the ecosystem, ReScript seems to be the way forward.
+**ReScript** seems to have its own syntax deviating from OCaml while ReasonML
+stays closer to OCaml. ReScript has gained a lot of traction and seems to have
+great tooling support.
 
 **ReasonML** seems to be loosing traction for frontend web development. I got
 this impression after spending a short while surveying the ecosystem and maybe
 thats not completely true.
 
-On the whole, **ReScript** seems to be the apparent choice.
+Being new to the ecosystem, **ReScript** seems to be the apparent choice.
 
 ### Further exploration
 
-After a lot more exploring, I realized that **ReasonML** might be a better
-choice, at-least for this task.
+On further exploration, **ReasonML** seems to be the better choice, at-least for
+this task of exploring OCaml for web development.
 
-The aim of this project is not only to build the component but also to get a
-taste of using OCaml for frontend development.
-
-It took quite a while to figure out the ecosystem and understand the communities
-behind OCaml, ReScript and ReasonML but understanding this ecosystem is an
-important step to choose between ReasonML and ReScript.
+It took quite a while to figure out the ecosystem but it is an important step to
+choose between ReasonML and ReScript.
 
 ### Why ReasonML?
 
 **ReScript** being young, might continue to veer further towards JavaScript and
-spin off into something different from ReasonML or OCaml. No doubt, ReScript
-might become a great language but the JavaScript ecosystem is enormous with many
-languages compiling to JavaScript such as *ClojureScript*, *Elm*, *PureScript*,
-*Dart* and *TypeScript*.
+spin off into something different from ReasonML or OCaml. ReScript might become
+a great language but the JavaScript ecosystem is enormous with many languages
+compiling to JavaScript such as ClojureScript, Elm, PureScript, Dart and
+TypeScript.
 
-Although the above is just speculation but we also have **ReasonML** which seems to
-remain close to OCaml, has the necessary JavaScript interoperability and has
-*Reason React*. Being adopted by companies for frontend development, ReasonML
-developers seem have reaped its benefits and had a pleasant development
-experience. Maybe due to the changing ecosystem ReasonML teams might have to
-migrate to ReScript.
-
-One of our aims is to use **OCaml** or a dialect for frontend development.
+**ReasonML** seems to remain close to OCaml and serve our purpose. It has the
+necessary JavaScript interoperability and has **ReasonReact**. Being adopted by
+companies for frontend development, ReasonML developers seem to have reaped its
+benefits and had a pleasant development experience. Maybe due to the changing
+ecosystem ReasonML teams might have to migrate to ReScript.
 
 Owing to fading away of ReasonML or so it **seems**, maybe its not the best
 choice to start a production level app using ReasonML but I don't yet know the
@@ -131,6 +120,17 @@ Choosing ReasonML over ReScript itself took quite a while. Lets get started!
 ([Awesome ReasonML](https://github.com/vramana/awesome-reasonml) maybe a good
 place to start.)
 
+## Design
+
+1. Rather than design the component from scratch we use
+   [react-select](https://react-select.com/home) which seems to be a seasoned
+   component and should have predictable behaviour across browsers.
+
+2. Since our focus is exploring `ReasonML` and its bindings, we use [this
+   JavaScript example (React-select popout
+   example)](https://github.com/JedWatson/react-select/blob/v3.0.0/docs/examples/Popout.js)
+   to configure the component in ReasonML.
+
 ## Exploring ReasonML
 
 We need to install a compiler and explore the language.
@@ -139,8 +139,7 @@ We need to install a compiler and explore the language.
 
 To experiment we use the BuckleScript command `bsb -make-world -w` to compile
 ReasonML, run the code using node and observe the compiled JavaScript which is
-indeed readable the latter of which was one of the goals of the BuckleScript
-author.
+readable and which was one of the goals of the BuckleScript author.
 
 Note: `bsb` helps with creating a sample project.
 
@@ -148,8 +147,8 @@ Note: `bsb` helps with creating a sample project.
 
 ### Webpack - Creating `webpack.config.js`
 
-After getting a taste of ReasonML, we create a Webpack configuration to load the
-compiled output JavaScript into an HTML page.
+After getting a taste of ReasonML, we next create a Webpack configuration to
+load the compiled output JavaScript into an HTML page.
 
 Note: Being a newbie, I had considered using [this starter
 app](https://github.com/yawaramin/fullstack-reason) but things worked out fine
@@ -191,8 +190,8 @@ concurrent commands for which npm package `concurrently` is used.
 
 Note: There seems to be a [Webpack
 bs-loader](https://www.npmjs.com/package/bs-loader) but its in maintenance mode
-and the documentation recommends using `bsb` with its `.bs.js` extension which is
-what we are doing.
+and the documentation recommends using `bsb` with its `.bs.js` extension which
+is what we are doing.
 
 To avoid the browser console from constantly showing a `404` due to a missing
 favicon, lets grab one from [favicon.io](https://favicon.io/) licensed under
@@ -215,15 +214,14 @@ To make a production build:
 
 # Learning ReasonML
 
-There seem to be good quality learning resources for ReasonML which are a couple
-of years old. Since everything is new to us, we will these older learning
-materials along with the older BuckleScript versions which they refer to. This
-is why `bs-platform` in the [package.json](./package.json) is an older version
-while the current version is *9.0.2* (28th June 2022)
+There seem to be good quality learning resources for ReasonML which are a year
+or two old. Since everything is new to us, we also use an older BuckleScript
+version referred to in these documents. This is why `bs-platform` in the
+[package.json](./package.json) is an older version while the current version is
+*9.0.2* (28th June 2022)
 
 This way we focus purely on learning and avoid distractions due to changes in
-versions. Besides, the ReasonML language wouldn't have changed much and once we
-learn the basics, we can easily ramp up to the latest.
+versions. Once we learn the basics, we can easily ramp up to the latest.
 
 ## Revision - ReasonML language 
 
@@ -235,7 +233,7 @@ learn the basics, we can easily ramp up to the latest.
 + -> (pipe-first for data-first) (data-first: good for type inferencing langs)
 + |> (reverse pipe)
 + _ pipe placeholder (data-first is inconvenient for partial application)
-+ Punning (for records, like in JS obj {a})
++ Punning (dont repeat the value if a var with same name is in scope)
 + list [1,2,3]  array [|1,2,3|]
 + labeled args (~arg1, ~arg2) (~arg1 as a1, ~arg2) (~arg1, ~arg2=?, ())
 + destructuring tuples, records
@@ -255,14 +253,12 @@ For instance, lets say a function of some JavaScript library expects an
 `encoding` argument which can either be `ascii` or `utf8`. Any other string will
 cause the JavaScript function to throw an exception. To correctly write a
 binding for such a function, we need to write a binding such that the Reason
-compiler itself allows only the above two strings. If we allow ReasonML code to
+compiler itself permits only the above two strings. If we allow ReasonML code to
 accept any value, our ReasonML code will still work but then we need to write
-code to check for valid values which means writing more code and we missing out
-on this feature provided by ReasonML.
-
-Writing un-necessary lines of code results needs a greater effort to maintain
-it.  Of course if the arguments being passed to the above function were coming
-from user input, we would still need to write validations.
+code to check for valid values which results in writing more code and our
+missing out on the feature provided by ReasonML. Writing un-necessary lines of
+code results needs a greater maintenance effort.  Of course if there's user
+input, we will need extra code to give user feedback.
 
 + [@bs.scope]
 + [@bs.val]
@@ -273,7 +269,7 @@ from user input, we would still need to write validations.
 ## Revision - modules/libraries
 
 + Belt is the BuckleScript standard library
-+ (Belt.Option.flatMap())  and Belt.Option.map()
++ (Belt.Option.flatMap()) and Belt.Option.map()
 + Pervasives (sqrt, sin, cost) (In the browser we also have Js.Math)
 + Js.log, Js.Math.,Js.String
 
@@ -331,4 +327,3 @@ Next, install the extension.
   (ReasonML author) 
 + [About bucklescript](https://discuss.ocaml.org/t/about-bucklescript/178)
   (ReasonML author) 
-
