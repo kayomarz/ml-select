@@ -1,5 +1,9 @@
+let desserts:array(MlSelect.SelectOptions.t) =
+[|
+ { "value": "one", "label": "One" },
+ { "value": "two", "label": "Two" },
+ { "value": "three", "label": "Three" },
+ |];
+
 [@react.component]
-  let make = () => <>
-<h1>{React.string("Country Select")}</h1>
-  </>
-;
+  let make = () => <MlSelect options=desserts/>;

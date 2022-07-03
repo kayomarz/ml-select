@@ -34,8 +34,8 @@ as well as explain the reasons for some of our design choices.
    which is marked as experimental. It's not yet clear how to write tests.
 5. Interact with React.js
    + ✓ Initially use existing bindings and get familiar with ReasonReact.
-   + Bring in `React-Select` (via npm), writing our own bindings.
-   + Complete the `<CountrySelect/>` component.
+   + ✓ Write own bindings for basic use of `React-Select` (via npm).
+   + Complete the `<CountrySelect/>` functionality configuring react-select.
 6. Interface:
    `<CountrySelect
       className="custom-class"
