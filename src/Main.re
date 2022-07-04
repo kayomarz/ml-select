@@ -1,3 +1,6 @@
 let reactRender = () => {
-  ReactDOMRe.renderToElementWithId(<App/>, "root");
+  switch(ReactDOM.querySelector("#root")) {
+  | Some(root) => ReactDOM.render(<App/>, root)
+  | None => ()
+  }
 };
