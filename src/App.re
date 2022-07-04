@@ -1,4 +1,4 @@
-let desserts:array(MlSelect.SelectOptions.t) =
+let desserts: array(ReactSelectRe.SelectOptions.t) =
 [|
  { "value": "one", "label": "One" },
  { "value": "two", "label": "Two" },
