@@ -1,3 +1,4 @@
+import './normalize.css';
 import './index.scss';
 
 import {reactRender} from '../lib/js/src/Main.bs.js';

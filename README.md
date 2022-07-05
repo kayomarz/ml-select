@@ -212,6 +212,10 @@ To make a production build:
 
     npm run build
 
+## normalize css
+
+Let use normalize.css to help achive a more consistent look across browsers.
+
 # Learning ReasonML
 
 There seem to be good quality learning resources for ReasonML which are a year
