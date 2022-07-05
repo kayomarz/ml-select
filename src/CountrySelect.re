@@ -1,6 +1,6 @@
 [@react.component]
-let make = (~country: option(string), ~onChange, ~className) => {
-  let (options, setOptions) = React.useState(() => Config.urlCountryList);
+let make = (~country: option(string), ~onChange, ~className="") => {
+  let (options, _) = React.useState(() => Config.urlCountryList);
   <>
     <Select
       defaultValue={Country.getValidCountryCode(country)}
