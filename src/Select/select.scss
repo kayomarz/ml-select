@@ -1,9 +1,13 @@
-.ml-select-with-auto-complete {
+.mls-select-with-auto-complete {
     button {
         color: #333;
         line-height: 24px;
         min-width: 20rem;
         display: inline-flex;
         justify-content: space-between;
+    }
+    .mls-select {
+        scrollbar-width: none;
+        overflow: hidden;
     }
 }
