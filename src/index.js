@@ -1,7 +1,7 @@
-import './normalize.css';
-import './index.scss';
+import './css-common/normalize.css';
+import './css-common/index.scss';
 
-import {reactRender} from '../lib/js/src/Main.bs.js';
+import {reactRender} from '../lib/js/src/Index.bs.js';
 
 window.onload = function() {
   reactRender();
