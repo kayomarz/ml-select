@@ -68,6 +68,7 @@ developing this component.
    ReScript/ReasonML provide.
 4. Coding conventions - See [reasonml-style.pdf (cs.brown.edu)](https://cs.brown.edu/courses/cs017/content/docs/reasonml-style.pdf)
 
+
 ## Choosing between ReScript & ReasonML
 
 **ReScript** seems to have its own syntax deviating from OCaml while ReasonML
@@ -215,6 +216,18 @@ To make a production build:
 ## normalize css
 
 Let use normalize.css to help achive a more consistent look across browsers.
+
+## bs-css
+
+[emotion-js](https://github.com/emotion-js/emotion) is a css in js library. To
+use it with ReasonML install `bs-css` and `bs-css-emoticon`.
+
+It can be convenient to use css in js. Let's give it a shot.
+
+Since we are using older version, namely 7.3.2 of `bs-platform` the latest
+`bs-css-emotion` gives an error. So lets use `3.0.0`.
+
+    npm install bs-css-emotion@3.0.0
 
 # Learning ReasonML
 
