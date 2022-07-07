@@ -13,6 +13,7 @@ external make:
     ~className: string,
     ~classNamePrefix: string,
     ~components: 'components,
+    ~isLoading: bool,
     ~menuIsOpen: bool,
     ~onChange: SelectOptions.t => unit,
     ~options: array(SelectOptions.t),
