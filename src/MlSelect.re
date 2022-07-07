@@ -90,13 +90,30 @@ module ChevronDown = {
     </Svg>;
 };
 
+[@bs.scope "JSON"] [@bs.val]
+external stringify: string => array(ReactSelectRe.SelectOptions.t) = "parse";
+/* external stringify: string => array(opt) = "parse"; */
+
 [@react.component]
-let make = (~options) => {
+let make =
+    (
+      ~defaultValue: option(string),
+      ~onChange,
+      ~className="",
+      ~dataUrl: string,
+    ) => {
   let (open_, setOpen) = React.useState(_ => false);
   let toggleOpen = _ => setOpen(a => !a);
   Js.log2("open", open_);
   /* let onClose = () => (); */
-  <div>
+  let strDefaultValue =
+    switch (defaultValue) {
+    | Some(str) => str
+    | None => "-"
+    };
+  let (options, _) =
+    React.useState(() => Country.fetchCountries(dataUrl)->stringify);
+  <div className={j|$className mls-select-with-auto-complete|j}>
     <Dropdown
       isOpen=open_
       target={
@@ -106,12 +123,16 @@ let make = (~options) => {
         </ButtonRe>
       }>
       /* onClose */
-  <ReactSelectRe
-      options
-    placeholder=[%raw {|"Search"|}]
-    components=[%raw {|{DropdownIndicator: MlSelect$DropdownIndicator, IndicatorSeparator: null}|}]
-    menuIsOpen=true
-    autoFocus=true
-    /> </Dropdown>
+
+        <ReactSelectRe
+          options
+          placeholder=[%raw {|"Search"|}]
+          components=[%raw
+            {|{DropdownIndicator: MlSelect$DropdownIndicator, IndicatorSeparator: null}|}
+          ]
+          menuIsOpen=true
+          autoFocus=true
+        />
+      </Dropdown>
   </div>;
 };
