@@ -42,6 +42,23 @@ To style the select component to its final appearance, we have a few options:
 + Hence we use an [react-select](https://react-select.com/home) which is an
   existing UI library.
 
+## Customizing `react-select`
+
+### props
+
++ `blurInputOnSelect=true` After a selection remove focus from the
+  input. Supposed to be handy for dismissing keyboard on touch devices.
+  
++ `classNamePrefix` To style `react-select` via css to:
+  - Remove the menu list scroll bar
+    
+### Replaced components
+    
++ `MenuList` Component replaced to style and remove the vertical scroll bar.
+
++ `DropdownIndicator` Component replaced to put a search icon
+
++ `IndicatorSeparator` (none) Remove this component. We dont want a separator.
 
 # Steps taken to build the compoent
 

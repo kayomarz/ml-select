@@ -1,26 +1,15 @@
 [@bs.scope "JSON"] [@bs.val]
 external stringify: string => array(ReactSelectRe.SelectOptions.t) = "parse";
-/* external stringify: string => array(opt) = "parse"; */
 
 module Dropdown = {
   [@react.component]
   let make = (~children, ~isOpen, ~target) =>
-    <div style={ReactDOM.Style.make(~position="relative", ())}>
-      target
-      {isOpen ? <div className="mls-menu"> children </div> : React.null}
-    </div>;
-  /* {isOpen ? <div className="mls-blanket" onClick={_ => close()} /> : React.null} */
+    <div> target {isOpen ? <div> children </div> : React.null} </div>;
 };
 
 module DropdownIndicator = {
   [@react.component]
   let make = () => <SubComponent.DropdownIndicator />;
-};
-
-module MenuList = {
-  [@react.component]
-  let make = (~children: React.element) =>
-    <div className="mls-menu-list"> children </div>;
 };
 
 let useSelectOptions = dataUrl => {
@@ -39,13 +28,19 @@ let getDefaultValueAsString = defaultValue => {
 [@react.component]
 let make =
     (
-      ~defaultValue: option(string),
-      ~onChange,
       ~className="",
       ~dataUrl: string,
+      ~defaultValue: option(string),
+      ~onChange,
     ) => {
   let (isOpen, setIsOpen) = React.useState(_ => true);
   let options = useSelectOptions(dataUrl);
+
+  let onMenuChange: ReactSelectRe.SelectOptions.t => unit =
+    e => {
+      Js.log3("onMenuChange", e.value, e.label);
+      setIsOpen(_ => false);
+    };
 
   /* let onClose = () => (); */
   <div className={j|$className mls-select-with-auto-complete|j}>
@@ -59,13 +54,17 @@ let make =
       /* onClose */
 
         <ReactSelectRe
-          options
-          placeholder=[%raw {|"Search"|}]
+          autoFocus=true
+          blurInputOnSelect=false
+          className="mls-react-select"
+          classNamePrefix="mls-react-select-"
           components=[%raw
-            {|{MenuList: Select$MenuList, DropdownIndicator: Select$DropdownIndicator, IndicatorSeparator: null}|}
+            {|{DropdownIndicator: Select$DropdownIndicator, IndicatorSeparator: null}|}
           ]
           menuIsOpen=true
-          autoFocus=true
+          onChange=onMenuChange
+          options
+          placeholder=[%raw {|"Search"|}]
         />
       </Dropdown>
   </div>;
