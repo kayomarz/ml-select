@@ -4,9 +4,20 @@ $shadow: hsla(218, 50%, 10%, 0.1);
     .mls-menu {
         background-color: orange;
         position: absolute;
+        width: 30rem;
         margin-top: 8px;
         border-radius: 4px;
         box-shadow: 0px 0px 0px 1px $shadow, 0px 4px 11px $shadow;
         // z-index: 2;
     }
+
+    // .mls-blanket {
+    //     background-color: red;
+    //     bottom: 0px;
+    //     left: 0px;
+    //     top: 1px;
+    //     right:0px;
+    //     position: fixed;
+    //     z-index: 1;
+    // }
 }

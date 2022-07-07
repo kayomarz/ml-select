@@ -4,8 +4,8 @@ module Dropdown = {
     <div style={ReactDOM.Style.make(~position="relative", ())}>
       target
       {isOpen ? <div className="mls-menu"> children </div> : React.null}
+      /* {isOpen ? <div className="mls-blanket" onClick={_ => close()} /> : React.null} */
     </div>;
-  /* {isOpen ? <Blanket onClick={_ => ()} /> : React.null} */
 };
 
 module DropdownIndicator = {
