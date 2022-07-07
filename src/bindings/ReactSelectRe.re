@@ -1,8 +1,7 @@
 module SelectOptions {
   type t = {
-    .
-      "value": string,
-    "label": string
+    value: string,
+    label: string
   };
 };
 
