@@ -14,6 +14,15 @@ based **ReasonML** and **ReScript** for frontend web development.
         onChange=(country => Js.log(country))
     />
 
+# Making from scratch
+
+Making the control from scratch is a lot of work.
+
++ Styling is [known to be difficult](https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/#aa-lets-talk-about-select).
++ Making it accessible [is important](https://24ways.org/2019/making-a-better-custom-select-element/).
+
+Given limited time and people resources, making from scratch does not seem feasable.
+
 # Steps taken to build the compoent
 
 The rest of this page is a log of the steps required and decisions made while
