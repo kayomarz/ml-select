@@ -16,10 +16,10 @@ external stringify: string => array(opt) = "parse";
 [@react.component]
 let make =
     (
-      ~defaultValue: option(string),
-      ~onChange,
       ~className="",
       ~dataUrl: string,
+      ~defaultValue: option(string),
+      ~onChange,
     ) => {
   let (options, _) =
     React.useState(() => Country.fetchCountries(dataUrl)->stringify);
@@ -28,5 +28,5 @@ let make =
     | Some(str) => str
     | None => "-"
     };
-  <div className> <SButton label=strDefaultValue /> </div>;
+  <div className> <SButton label=strDefaultValue /> <List options /> </div>;
 };
