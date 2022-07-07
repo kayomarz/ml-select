@@ -17,6 +17,12 @@ module DropdownIndicator = {
   let make = () => <SubComponent.DropdownIndicator />;
 };
 
+module MenuList = {
+  [@react.component]
+  let make = (~children: React.element) =>
+    <div className="mls-menu-list"> children </div>;
+};
+
 let useSelectOptions = dataUrl => {
   let (options, _) =
     React.useState(() => Country.fetchCountries(dataUrl)->stringify);
@@ -40,7 +46,7 @@ let make =
     ) => {
   let (isOpen, setIsOpen) = React.useState(_ => true);
   let options = useSelectOptions(dataUrl);
-  
+
   /* let onClose = () => (); */
   <div className={j|$className mls-select-with-auto-complete|j}>
     <Dropdown
@@ -56,7 +62,7 @@ let make =
           options
           placeholder=[%raw {|"Search"|}]
           components=[%raw
-            {|{DropdownIndicator: Select$DropdownIndicator, IndicatorSeparator: null}|}
+            {|{MenuList: Select$MenuList, DropdownIndicator: Select$DropdownIndicator, IndicatorSeparator: null}|}
           ]
           menuIsOpen=true
           autoFocus=true
