@@ -1,0 +1,24 @@
+$mls-text-color: #333;
+$mls-selected-bg-color: #cdf;
+
+.mls-select-with-auto-complete {
+    display: inline-block;
+    form.mls-list {
+        max-height: 8rem;
+        overflow: hidden;
+        border: solid gray 1px;
+        input[type="text"] {
+            display: block;
+            border: none;
+            line-height: 1rem;
+            font-size: 0.9rem;
+            max-height: 1rem;
+            padding: 0rem;
+            margin: 0.3rem;
+        }
+        input:focus {
+            background-color: $mls-selected-bg-color;
+            border: none;
+        }
+    }
+}
