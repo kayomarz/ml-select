@@ -1,2 +1,12 @@
+$shadow: hsla(218, 50%, 10%, 0.1);
+
 .mls-select-with-auto-complete {
+    .mls-menu {
+        background-color: orange;
+        position: absolute;
+        margin-top: 8px;
+        border-radius: 4px;
+        box-shadow: 0px 0px 0px 1px $shadow, 0px 4px 11px $shadow;
+        // z-index: 2;
+    }
 }

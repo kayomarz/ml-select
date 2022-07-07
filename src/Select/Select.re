@@ -1,28 +1,9 @@
-module Menu = {
-  [@react.component]
-  let make = (~children) => {
-    let shadow = "red" /* 'hsla(218, 50%, 10%, 0.1)' */;
-    <div
-      style={ReactDOM.Style.make(
-        ~backgroundColor="white",
-        ~borderRadius="4",
-        ~boxShadow="0 0 0 1px $shadow, 0 4px 11px $shadow",
-        ~marginTop="8",
-        ~position="absolute",
-        ~zIndex="2",
-        (),
-      )}>
-      children
-    </div>;
-  };
-};
-
 module Dropdown = {
   [@react.component]
   let make = (~children, ~isOpen, ~target) =>
     <div style={ReactDOM.Style.make(~position="relative", ())}>
       target
-      {isOpen ? <Menu> children </Menu> : React.null}
+      {isOpen ? <div className="mls-menu"> children </div> : React.null}
     </div>;
   /* {isOpen ? <Blanket onClick={_ => ()} /> : React.null} */
 };
@@ -44,7 +25,7 @@ let make =
       ~className="",
       ~dataUrl: string,
     ) => {
-  let (isOpen, setIsOpen) = React.useState(_ => false);
+  let (isOpen, setIsOpen) = React.useState(_ => true);
   /* let onClose = () => (); */
   let strDefaultValue =
     switch (defaultValue) {
