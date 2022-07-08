@@ -1,5 +1,5 @@
-import './css-common/normalize.css';
-import './css-common/index.scss';
+import './index.scss';
+import './Select/select.scss';
 
 import {reactRender} from '../lib/js/src/Index.bs.js';
 

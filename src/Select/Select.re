@@ -1,32 +1,64 @@
-module SButton = {
+module Dropdown = {
   [@react.component]
-  let make = (~label) => {
-    <button> {React.string(label)} </button>;
-  };
+  let make = (~children, ~isOpen, ~target) =>
+    <div> target {isOpen ? <div> children </div> : React.null} </div>;
 };
 
-type opt = {
-  value: string,
-  label: string,
+module DropdownIndicator = {
+  [@react.component]
+  let make = () => <SubComponent.DropdownIndicator />;
 };
-
-[@bs.scope "JSON"] [@bs.val]
-external stringify: string => array(opt) = "parse";
 
 [@react.component]
 let make =
     (
+      ~className="",
+      ~options: array(ReactSelectRe.SelectOptions.t),
       ~defaultValue: option(string),
       ~onChange,
-      ~className="",
-      ~dataUrl: string,
     ) => {
-  let (options, _) =
-    React.useState(() => Country.fetchCountries(dataUrl)->stringify);
-  let strDefaultValue =
-    switch (defaultValue) {
-    | Some(str) => str
-    | None => "-"
+  let (isOpen, setIsOpen) = React.useState(_ => true);
+
+  let (opt, setOpt) =
+    React.useState(_ => {
+      defaultValue->Belt.Option.flatMap(
+        SelectOptions.findItemWithValue(options),
+      )
+    });
+
+  let onSelectChange: ReactSelectRe.SelectOptions.t => unit =
+    e => {
+      Js.log3("onMenuChange", e.value, e.label);
+      setIsOpen(_ => false);
+      setOpt(_ => Some(e));
     };
-  <div className> <SButton label=strDefaultValue /> </div>;
+
+  <div className={j|$className mls-select-with-auto-complete|j}>
+    <Dropdown
+      isOpen
+      target={
+        <Button onClick={_ => setIsOpen(a => !a)} isSelected=isOpen>
+          {switch (opt) {
+           | Some((c: ReactSelectRe.SelectOptions.t)) =>
+             React.string(c.label)
+           | None => React.string("Error: No data") /* Shouldnt occur */
+           }}
+        </Button>
+      }>
+      <ReactSelectRe
+        autoFocus=true
+        blurInputOnSelect=false
+        className="mls-react-select"
+        classNamePrefix="mls-react-select-"
+        components=[%raw
+          {|{DropdownIndicator: Select$DropdownIndicator, IndicatorSeparator: null}|}
+        ]
+        isLoading=false
+        menuIsOpen=true
+        onChange=onSelectChange
+        options
+        placeholder=[%raw {|"Search"|}]
+      />
+    </Dropdown>
+  </div>;
 };

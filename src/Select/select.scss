@@ -1,0 +1,23 @@
+$shadow: hsla(218, 50%, 10%, 0.1);
+
+.mls-select-with-auto-complete {
+    // .mls-menu {
+    //     position: absolute;
+    //     width: 30rem;
+    //     margin-top: 8px;
+    //     border-radius: 4px;
+    //     box-shadow: 10px 0px 0px 1px $shadow, 0px 4px 11px $shadow;
+    // }
+
+    .mls-react-select {
+        width: 30rem;
+    }
+
+    .mls-react-select-__menu {
+        margin-top: 8px
+    }
+
+    .mls-react-select-__menu-list {
+        overflow-y: hidden;
+    }
+}

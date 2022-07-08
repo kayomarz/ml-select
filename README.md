@@ -14,6 +14,52 @@ based **ReasonML** and **ReScript** for frontend web development.
         onChange=(country => Js.log(country))
     />
 
+# Using `React-Select` as a base for this component
+
+## Requirements
+
++ Accessability
++ Keyboard shortcuts
++ Totally customized appearance
+
+## Approaches
+
+To style the select component to its final appearance, we have a few options:
+
++ Create from scratch but this not trivial
+  + Styling is [known to be difficult](https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/#aa-lets-talk-about-select).
+  + Making it accessible [is
+    important](https://24ways.org/2019/making-a-better-custom-select-element/).
+  + Keyboard shortcuts also need to be implemented from scratch.
+
++ Use HTML `<input list="id_of_datalist">` along with a `<datalist>`. It is
+  difficult to style this in a cross browser manner.
+
++ Create our own button as the main control and use HTML `<select rows="6">` to
+  let user select items. This is also difficult to style in a cross browser
+  manner.
+  
++ Hence we use an [react-select](https://react-select.com/home) which is an
+  existing UI library.
+
+## Customizing `react-select`
+
+### props
+
++ `blurInputOnSelect=true` After a selection remove focus from the
+  input. Supposed to be handy for dismissing keyboard on touch devices.
+  
++ `classNamePrefix` To style `react-select` via css to:
+  - Remove the menu list scroll bar
+    
+### Replaced components
+    
++ `MenuList` Component replaced to style and remove the vertical scroll bar.
+
++ `DropdownIndicator` Component replaced to put a search icon
+
++ `IndicatorSeparator` (none) Remove this component. We dont want a separator.
+
 # Steps taken to build the compoent
 
 The rest of this page is a log of the steps required and decisions made while
