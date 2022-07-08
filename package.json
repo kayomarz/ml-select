@@ -31,6 +31,7 @@
     "@atlaskit/button": "^16.3.3",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
+    "react-select": "^5.4.0",
     "reason-react": "^0.9.1"
   }
 }
