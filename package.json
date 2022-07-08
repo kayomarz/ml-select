@@ -6,6 +6,7 @@
     "bsb-watch": "bsb -make-world -w",
     "js-watch": "webpack serve --open --env development",
     "start": "concurrently \"npm run js-watch\" \"npm run bsb-watch\"",
+    "test": "concurrently \"npm run bsb-watch\" \"jest --watchAll\"",
     "build": "bsb -clean-world && bsb -make-world && webpack --env production"
   },
   "keywords": [
