@@ -30,11 +30,11 @@ let make = (~country: option(string), ~onChange, ~className="") => {
   let (data, isLoadingData) = useFetchData(Config.countryDataUrl);
 
   isLoadingData
-    ? <p> {React.string("Loading...")} </p>
+    ? <p> {React.string("Loading country data...")} </p>
     : <>
         <Select
           defaultValue={Country.getValidCountryCode(country)}
-          onChange
+          onChange={((value, label)) => onChange(value)}
           className
           options=data
         />

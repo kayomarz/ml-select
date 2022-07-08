@@ -28,9 +28,9 @@ let make =
 
   let onSelectChange: ReactSelectRe.SelectOptions.t => unit =
     e => {
-      Js.log3("onMenuChange", e.value, e.label);
       setIsOpen(_ => false);
       setOpt(_ => Some(e));
+      onChange((e.value, e.label));
     };
 
   <div className={j|$className mls-select-with-auto-complete|j}>
