@@ -175,7 +175,19 @@ place to start.)
 2. Since our focus is exploring `ReasonML` and its bindings, we use [this
    JavaScript example (React-select popout
    example)](https://github.com/JedWatson/react-select/blob/v3.0.0/docs/examples/Popout.js)
-   to configure the component in ReasonML.
+   to quickly get started with `react-select` and configure the component in
+   ReasonML.
+   
+3. `<Button/>` As we stated out with a `react-select` example, we used
+   [@atlaskit/button](https://atlassian.design/components/button/) but later saw
+   that we are not using any button features.
+   
+   Hence we switch to using a plain html `<button/>` styled using css and design
+   a simple `<svg/>` triangle for the caret.
+   
+        <svg viewBox="0 0 30 15">
+            <polygon points="0 0 30 0 15 15 0 0" />
+        </svg>
 
 ## Exploring ReasonML
 

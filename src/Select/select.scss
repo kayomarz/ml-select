@@ -21,3 +21,24 @@ $shadow: hsla(218, 50%, 10%, 0.1);
         overflow-y: hidden;
     }
 }
+
+.mls-select-with-auto-complete {
+    button.mls-select-button {
+        margin-bottom: 0.2rem;
+        max-width: 20rem;
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0.4rem 1rem;
+
+        .btn-label {
+            font-size: 1rem;
+        }
+
+        svg.btn-icon {
+            margin-left: 0.5rem;
+            width: 10px;
+        }
+    }
+}
