@@ -4,10 +4,10 @@ module Dropdown = {
     <div> target {isOpen ? <div> children </div> : React.null} </div>;
 };
 
-module DropdownIndicator = {
-  [@react.component]
-  let make = () => <SubComponent.DropdownIndicator />;
-};
+/* module DropdownIndicator = { */
+/*   [@react.component] */
+/*   let make = () => <SubComponent.DropdownIndicator />; */
+/* }; */
 
 [@react.component]
 let make =
@@ -51,7 +51,7 @@ let make =
         className="mls-react-select"
         classNamePrefix="mls-react-select-"
         components=[%raw
-          {|{DropdownIndicator: Select$DropdownIndicator, IndicatorSeparator: null}|}
+          {|{DropdownIndicator: null, IndicatorSeparator: null}|}
         ]
         isLoading=false
         menuIsOpen=true
