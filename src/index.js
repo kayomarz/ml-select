@@ -1,5 +1,4 @@
 import 'flag-icons';
-import './normalize.css';
 import './index.scss';
 import './Select/select.scss';
 
