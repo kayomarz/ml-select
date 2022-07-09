@@ -9,6 +9,14 @@ module Dropdown = {
 /*   let make = () => <SubComponent.DropdownIndicator />; */
 /* }; */
 
+let formatOptionLabel = (r: ReactSelectRe.SelectOptions.t) => {
+  let flagSuffix = r.value;
+  <>
+    <span className={j|fi fi-$flagSuffix|j} />
+    <span> {React.string(r.label)} </span>
+  </>;
+};
+
 [@react.component]
 let make =
     (
@@ -53,6 +61,7 @@ let make =
         components=[%raw
           {|{DropdownIndicator: null, IndicatorSeparator: null}|}
         ]
+        formatOptionLabel
         isLoading=false
         menuIsOpen=true
         onChange=onSelectChange

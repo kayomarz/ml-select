@@ -28,6 +28,7 @@
     "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
+    "flag-icons": "^6.6.3",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-select": "^5.4.0",

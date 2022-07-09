@@ -13,6 +13,7 @@ external make:
     ~className: string,
     ~classNamePrefix: string,
     ~components: 'components,
+    ~formatOptionLabel: SelectOptions.t => React.element,
     ~isLoading: bool,
     ~menuIsOpen: bool,
     ~onChange: SelectOptions.t => unit,
