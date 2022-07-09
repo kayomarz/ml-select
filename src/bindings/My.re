@@ -10,3 +10,9 @@ module Array = {
 
   [@bs.get] external length: array('a) => int = "length";
 };
+
+module Dom = {
+  module Element = {
+    [@bs.send] external focus: 'a => unit = "focus";
+  };
+};
