@@ -274,6 +274,30 @@ To make a production build:
 
 Let use normalize.css to help achive a more consistent look across browsers.
 
+## flag-icons
+
+When using webpack with flag-icons, the build folder contains numerous svg
+files, one for each flag.
+
+This will not be a great user experience as new icons will appear after a delay.
+
+Lets inline things.
+
+With webpack 5, add the rule:
+
+        {
+          oneOf: [
+            {
+              test: /\.svg$/,
+              type: "asset/inline",
+            },
+            {
+              test: /\.(jpg|png|svg)$/,
+              type: "asset/resource",
+            },
+          ]
+        }
+
 # Learning ReasonML
 
 There seem to be good quality learning resources for ReasonML which are a year

@@ -40,6 +40,18 @@ module.exports = env => {
             "sass-loader", // Compiles Sass to CSS
           ],
         },
+        {
+          oneOf: [
+            {
+              test: /\.svg$/,
+              type: "asset/inline",
+            },
+            {
+              test: /\.(jpg|png|svg)$/,
+              type: "asset/resource",
+            },
+          ]
+        },
       ],
     },
   };

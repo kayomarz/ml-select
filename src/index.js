@@ -1,4 +1,4 @@
-import 'flag-icons';
+import 'flag-icons/css/flag-icons.css';
 import './index.scss';
 import './Select/select.scss';
 
