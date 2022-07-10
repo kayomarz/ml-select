@@ -1,0 +1,51 @@
+$color-0: #afa7a0;
+$color-1: #222;
+$color-2: #e0e0e0;
+
+.custom-class.mls-select-with-auto-complete {
+    button.mls-select-button {
+        .btn-label {
+            font-size: 1rem;
+        }
+        svg.btn-icon {
+            margin-left: 0.6rem;
+            width: 8px;
+            fill: $color-1;
+        }
+        color: $color-1;
+        border-color: $color-0;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 0.25rem;
+        background: none;
+        white-space: nowrap;
+        margin-bottom: 0.2rem;
+        padding: 0.4rem 1rem;
+
+    }
+
+    .mls-react-select {
+        max-width: 28rem;
+    }
+
+    .mls-react-select-__menu {
+        margin-top: 8px
+    }
+
+    .mls-react-select-__control::before {
+        width: 1.1rem;
+        margin-left: 0.7rem;
+    }
+
+    .mls-react-select-__placeholder {
+        color: $color-0 ;
+    }
+    .mls-react-select-__option {
+        color: $color-1;
+        padding: 6px 10px;
+        span.fi {
+            margin-right: 0.6rem;
+            width: 1.1rem;
+        }
+    }
+}

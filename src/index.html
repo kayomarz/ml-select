@@ -10,47 +10,78 @@
     </style>
 
     <style>
+      html {
+          font-size: 10pt;
+      }
+
       body {
           color: #555;
-          margin: 2vh 3vw;
+      }
+
+      h1 {
+          font-size: 1.2rem;
+          font-weight: normal;
+          color: #555;
       }
 
       #root {
           min-height: 4rem;
       }
+
       .loading {
+          text-align: center;
+      }
+
+      .loading p:first-child {
+          padding-top: 8vh;
+      }
+
+      .loading p:last-child {
+          padding-top: 5vh;
       }
 
       header {
           margin-bottom: 2vh;
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          color: #222;
+          background-color: #eee;
+          border-color: #ddd;
+          border-style: solid;
+          border-width: 0px 0px 1px 0px;
+      }
+
+      header, main {
+          padding: 0vh 2vw;
+      }
+
+      header .header-title {
+          font-size: 1.1rem;
+          color: steelblue;
+      }
+
+      address a {
+          margin-left: 0.5rem;
       }
 
     </style>
 
   </head>
   <body>
-    <header style="display: flex; align-items: baseline; justify-content: space-between;">
-      <div>
-        <p style="margin-top: 0px">Welcome</p>
-        <p aria-hidden="true" style="font-size: 0.7rem;">
-          ☾˙❀‿❀˙☽
-        </p>
-      </div>
-      <div style="font-size: 0.9rem">
-        <p style="margin: 0px;">
-          <ul style="list-style-type: none; margin: 0px; padding: 0px;">
-            <li>
-              <p><a href="https://github.com/kayomarz/ml-select">GitHub</a></p>
-            </li>
-            <li>
-              </p><a href="mailto:kayomarz@gmail.com">kayomarz@gmail.com</a></p>
-            </li>
-          </ul>
-        </p>
-      </div>
+    <header>
+      <h1>Country Select</h1>
+      <address style="font-size: 0.9rem">
+        <a href="https://github.com/kayomarz/ml-select">GitHub</a>
+        <a href="mailto:kayomarz@gmail.com">kayomarz@gmail.com</a>
+      </address>
     </header>
-    <main id="root" style="margin-top: 8vh; margin-bottom: 10vh">
-      <p class="loading" aria-busy="true">Loading ...</p>
+    <main id="root" style="margin-top: 2vh; margin-bottom: 10vh">
+      <div class="loading" aria-busy="true">
+        <p>Welcome</p>
+        <p aria-hidden="true">☾˙❀‿❀˙☽</p>
+        <p>Loading...</p>
+      </div>
     </main>
   </body>
 </html>

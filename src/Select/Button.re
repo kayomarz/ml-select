@@ -32,9 +32,9 @@ let make = (~children, ~grabFocus, ~isOpen, ~onClick, ~onKeyDown) => {
     <span className="btn-label"> children </span>
     <svg
       className="btn-icon"
-      viewBox="0 0 30 15"
+      viewBox="0 0 30 18"
       xmlns="http://www.w3.org/2000/svg">
-      <polygon points="0 0 30 0 15 15 0 0" />
+      <polygon points="0 0 30 0 15 18 0 0" />
     </svg>
   </button>;
 };

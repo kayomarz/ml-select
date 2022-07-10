@@ -30,11 +30,13 @@ let make = (~country: option(string), ~onChange, ~className="") => {
   let (data, isLoadingData) = useFetchData(Config.countryDataUrl);
 
   isLoadingData
-    ? <p className="loading" ariaBusy=true>
-        {React.string("Loading ...")}
-      </p>
+    ? <div className="loading" ariaBusy=true>
+        <p>{React.string("Welcome")}</p>
+        <p ariaHidden=true>{React.string({js|☾˙❀‿❀˙☽|js})}</p>
+        <p>{React.string("Loading...")}</p>
+      </div>
     : <>
-        <p> {React.string("Country:")} </p>
+        <p> {React.string("Select a country")} </p>
         <Select
           defaultValue={Country.getValidCountryCode(country)}
           onChange={((value, label)) => onChange(value)}
