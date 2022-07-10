@@ -4,11 +4,6 @@ module Dropdown = {
     <div> target {isOpen ? <div> children </div> : React.null} </div>;
 };
 
-/* module DropdownIndicator = { */
-/*   [@react.component] */
-/*   let make = () => <SubComponent.DropdownIndicator />; */
-/* }; */
-
 let formatOptionLabel = (r: ReactSelectRe.SelectOptions.t) => {
   let flagSuffix = r.value;
   <>
@@ -21,11 +16,11 @@ let formatOptionLabel = (r: ReactSelectRe.SelectOptions.t) => {
 let make =
     (
       ~className="",
-      ~options: array(ReactSelectRe.SelectOptions.t),
       ~defaultValue: option(string),
       ~onChange,
+      ~options: array(ReactSelectRe.SelectOptions.t),
     ) => {
-  let (isOpen, setIsOpen) = React.useState(_ => true);
+  let (isOpen, setIsOpen) = React.useState(_ => false);
 
   let (opt, setOpt) =
     React.useState(_ => {
@@ -45,7 +40,7 @@ let make =
     <Dropdown
       isOpen
       target={
-        <Button onClick={_ => setIsOpen(a => !a)} isSelected=isOpen>
+        <Button grabFocus=true isOpen onClick={_ => setIsOpen(a => !a)}>
           {switch (opt) {
            | Some((c: ReactSelectRe.SelectOptions.t)) =>
              React.string(c.label)

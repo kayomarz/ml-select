@@ -10,8 +10,8 @@ external make:
   (
     ~autoFocus: bool,
     ~blurInputOnSelect: bool,
-    ~className: string,
     ~classNamePrefix: string,
+    ~className: string,
     ~components: 'components,
     ~formatOptionLabel: SelectOptions.t => React.element,
     ~isLoading: bool,

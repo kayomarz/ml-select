@@ -1,15 +1,30 @@
-[@react.component]
-let make = (~onClick, ~isSelected, ~children) => {
-  let btn = React.useRef(Js.Nullable.null);
+let useAutoFocus = (grabFocus, isOpen) => {
+  let refEl = React.useRef(Js.Nullable.null);
+
   React.useEffect1(
     () => {
-      My.Dom.Element.focus(btn.current);
+      if (grabFocus && !Js.Nullable.isNullable(refEl.current) && !isOpen) {
+        /* TODO: This creates a race to grab `focus` because other components
+         * too may contend to get focus. Instead use a top-level application
+         * construct to handle granting of focus.
+         */
+        My.Dom.Element.focus(refEl.current);
+        ();
+      } else {
+        ();
+      };
       Some(() => ());
     },
-    [||],
+    [|isOpen, grabFocus|],
   );
+  refEl;
+};
+
+[@react.component]
+let make = (~grabFocus, ~children, ~isOpen, ~onClick) => {
+  let btnRef = useAutoFocus(grabFocus, isOpen);
   <button
-    ref={ReactDOM.Ref.domRef(btn)} className="mls-select-button" onClick>
+    ref={ReactDOM.Ref.domRef(btnRef)} className="mls-select-button" onClick>
     <span className="btn-label"> children </span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
