@@ -1,6 +1,7 @@
 open Jest;
 
-let _ = describe("getLabelForValue", () => {
+let _ =
+  describe("getLabelForValue", () => {
     let options: array(ReactSelectRe.SelectOptions.t) = [|
       {value: "foo", label: "Foo foo"},
       {value: "bar", label: "Bar bar"},
@@ -24,6 +25,24 @@ let _ = describe("getLabelForValue", () => {
     Expect.(
       test("non existing", () => {
         expect(SelectOptions.getLabelForValue(options, "baz")) |> toBe(None)
+      })
+    );
+
+    Expect.(
+      test("getOptionIndex", () => {
+        expect(SelectOptions.getOptionIndex(options, "bar")) |> toBe(Some(1))
+      })
+    );
+
+    Expect.(
+      test("getOptionIndex", () => {
+        expect(SelectOptions.getOptionIndex(options, "foo")) |> toBe(Some(0))
+      })
+    );
+
+    Expect.(
+      test("getOptionIndex", () => {
+        expect(SelectOptions.getOptionIndex(options, "baz")) |> toBe(None)
       })
     );
   });
