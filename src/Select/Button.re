@@ -1,4 +1,4 @@
-let useAutoFocus = (grabFocus, isOpen) => {
+let useGrabFocus = (grabFocus, isOpen) => {
   let refEl = React.useRef(Js.Nullable.null);
 
   React.useEffect1(
@@ -21,8 +21,8 @@ let useAutoFocus = (grabFocus, isOpen) => {
 };
 
 [@react.component]
-let make = (~grabFocus, ~children, ~isOpen, ~onClick) => {
-  let btnRef = useAutoFocus(grabFocus, isOpen);
+let make = (~children, ~grabFocus, ~isOpen, ~onClick) => {
+  let btnRef = useGrabFocus(grabFocus, isOpen);
   <button
     ref={ReactDOM.Ref.domRef(btnRef)} className="mls-select-button" onClick>
     <span className="btn-label"> children </span>
