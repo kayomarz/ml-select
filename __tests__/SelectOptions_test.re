@@ -30,19 +30,89 @@ let _ =
 
     Expect.(
       test("getOptionIndex", () => {
-        expect(SelectOptions.getOptionIndex(options, "bar")) |> toBe(Some(1))
+        expect(SelectOptions.getOptionIndex(options, "bar"))
+        |> toBe(Some(1))
       })
     );
 
     Expect.(
       test("getOptionIndex", () => {
-        expect(SelectOptions.getOptionIndex(options, "foo")) |> toBe(Some(0))
+        expect(SelectOptions.getOptionIndex(options, "foo"))
+        |> toBe(Some(0))
       })
     );
 
     Expect.(
       test("getOptionIndex", () => {
         expect(SelectOptions.getOptionIndex(options, "baz")) |> toBe(None)
+      })
+    );
+
+    Expect.(
+      test("getRelativeToCurrent", () => {
+        expect(
+          SelectOptions.getRelativeToCurrent(
+            options,
+            {value: "bar", label: "Bar bar"},
+            1,
+          ),
+        )
+        |> toEqual(
+             Some(
+               {value: "foo-bar", label: "Foo-Bar foo-bar"}: ReactSelectRe.SelectOptions.t,
+             ),
+           )
+      })
+    );
+
+    Expect.(
+      test("getRelativeToCurrent", () => {
+        expect(
+          SelectOptions.getRelativeToCurrent(
+            options,
+            {value: "bar", label: "Bar bar"},
+            99,
+          ),
+        )
+        |> toEqual(
+             Some(
+               {value: "foo-bar", label: "Foo-Bar foo-bar"}: ReactSelectRe.SelectOptions.t,
+             ),
+           )
+      })
+    );
+
+    Expect.(
+      test("getRelativeToCurrent", () => {
+        expect(
+          SelectOptions.getRelativeToCurrent(
+            options,
+            {value: "bar", label: "Bar bar"},
+            -1,
+          ),
+        )
+        |> toEqual(
+             Some(
+               {value: "foo", label: "Foo foo"}: ReactSelectRe.SelectOptions.t,
+             ),
+           )
+      })
+    );
+
+    Expect.(
+      test("getRelativeToCurrent", () => {
+        expect(
+          SelectOptions.getRelativeToCurrent(
+            options,
+            {value: "bar", label: "Bar bar"},
+            -99,
+          ),
+        )
+        |> toEqual(
+             Some(
+               {value: "foo", label: "Foo foo"}: ReactSelectRe.SelectOptions.t,
+             ),
+           )
       })
     );
   });

@@ -18,3 +18,19 @@ let getOptionIndex =
     });
   index >= 0 ? Some(index) : None;
 };
+
+let getRelativeToCurrent =
+    (options, currentOpt: ReactSelectRe.SelectOptions.t, relativeIndex: int)
+    : option(ReactSelectRe.SelectOptions.t) => {
+  getOptionIndex(options, currentOpt.value)
+  ->Belt.Option.flatMap(My.Array.addIndex(options, _, relativeIndex))
+  ->Belt.Option.map(i => options[i]);
+};
+
+let getNextOption = (options, currentOpt) => {
+  getRelativeToCurrent(options, currentOpt, 1);
+};
+
+let getPrevOption = (options, currentOpt) => {
+  getRelativeToCurrent(options, currentOpt, -1);
+};
