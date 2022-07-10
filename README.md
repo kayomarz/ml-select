@@ -19,7 +19,8 @@ based **ReasonML** and **ReScript** for frontend web development.
 ## Requirements
 
 + Accessability
-+ Keyboard shortcuts
++ Keyboard shortcuts to open/close, selection options, cancel. Let arrow keys
+  work similar as it does for HTML `<select/>` element.
 + Totally customized appearance
 
 ## Approaches
@@ -92,7 +93,7 @@ developing this component.
    + `CountrySelect` will then use `MlSelect`.
    + Handle invalid user input. i.e. what if a user types an option which does
      not exist and hits enter.
-   + Ensure all keyboard shortcuts work (open/close dropdown, navigate and
+   + ✓ Ensure all keyboard shortcuts work (open/close dropdown, navigate and
      select options, cancel choice with keyboard)
    + The search filter is internal. It filters countries by name without case
      sensitivity.

@@ -21,15 +21,19 @@ let useGrabFocus = (grabFocus, isOpen) => {
 };
 
 [@react.component]
-let make = (~children, ~grabFocus, ~isOpen, ~onClick) => {
+let make = (~children, ~grabFocus, ~isOpen, ~onClick, ~onKeyDown) => {
   let btnRef = useGrabFocus(grabFocus, isOpen);
+
   <button
-    ref={ReactDOM.Ref.domRef(btnRef)} className="mls-select-button" onClick>
+    className="mls-select-button"
+    onClick
+    onKeyDown
+    ref={ReactDOM.Ref.domRef(btnRef)}>
     <span className="btn-label"> children </span>
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       className="btn-icon"
-      viewBox="0 0 30 15">
+      viewBox="0 0 30 15"
+      xmlns="http://www.w3.org/2000/svg">
       <polygon points="0 0 30 0 15 15 0 0" />
     </svg>
   </button>;

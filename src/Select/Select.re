@@ -1,3 +1,5 @@
+external toOpt: 'a => ReactSelectRe.SelectOptions.t = "%identity";
+
 module Dropdown = {
   [@react.component]
   let make = (~children, ~isOpen, ~target) =>
@@ -29,13 +31,6 @@ let make =
       )
     });
 
-  let onSelectChange: ReactSelectRe.SelectOptions.t => unit =
-    e => {
-      setIsOpen(_ => false);
-      setOpt(_ => Some(e));
-      onChange((e.value, e.label));
-    };
-
   let closeOnEscape = e =>
     if (e##key == "Escape") {
       setIsOpen(_ => false);
@@ -43,11 +38,55 @@ let make =
       ();
     };
 
+  let onSelectChange: ReactSelectRe.SelectOptions.t => unit =
+    e => {
+      setIsOpen(_ => false);
+      setOpt(_ => Some(e));
+      onChange((e.value, e.label));
+    };
+
+  let setNextOrPrev = (opt, fn) => {
+    opt
+    ->Belt.Option.flatMap(fn(options))
+    ->(
+        newOpt => {
+          setOpt(_ => newOpt);
+
+          /* TODO: Used an escape hatch (toOpt) to forcibly co-erce a type
+           * although it shouldn't be needed. Its difficult to figure this out.
+           * Without explicitly stating the record type (SelectOptions.t) we get
+           * see error:
+           *   The record field value can't be found
+           * On the other hand type inferencing should work out.
+           * Need to look into this.
+            */
+          let o = toOpt(newOpt);
+          onChange((o.value, o.label));
+        }
+      );
+    ();
+  };
+
+  let setNext = setNextOrPrev(_, SelectOptions.getNextOption);
+  let setPrev = setNextOrPrev(_, SelectOptions.getPrevOption);
+
+  let onKeyDown = evt => {
+    let key = ReactEvent.Keyboard.key(evt);
+    switch (key) {
+    | "ArrowUp" => setPrev(opt)
+    | "ArrowLeft" => setPrev(opt)
+    | "ArrowDown" => setNext(opt)
+    | "ArrowRight" => setNext(opt)
+    | _ => ()
+    };
+  };
+
   <div className={j|$className mls-select-with-auto-complete|j}>
     <Dropdown
       isOpen
       target={
-        <Button grabFocus=true isOpen onClick={_ => setIsOpen(a => !a)}>
+        <Button
+          grabFocus=true isOpen onClick={_ => setIsOpen(a => !a)} onKeyDown>
           {switch (opt) {
            | Some((c: ReactSelectRe.SelectOptions.t)) =>
              React.string(c.label)
