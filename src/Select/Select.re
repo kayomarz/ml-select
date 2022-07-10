@@ -36,6 +36,13 @@ let make =
       onChange((e.value, e.label));
     };
 
+  let closeOnEscape = e =>
+    if (e##key == "Escape") {
+      setIsOpen(_ => false);
+    } else {
+      ();
+    };
+
   <div className={j|$className mls-select-with-auto-complete|j}>
     <Dropdown
       isOpen
@@ -58,8 +65,9 @@ let make =
         ]
         formatOptionLabel
         isLoading=false
-        menuIsOpen=true
+        menuIsOpen=isOpen
         onChange=onSelectChange
+        onKeyDown=closeOnEscape
         options
         placeholder=[%raw {|"Search"|}]
       />
