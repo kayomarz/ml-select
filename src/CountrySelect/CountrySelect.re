@@ -39,7 +39,7 @@ let make = (~country: option(string), ~onChange, ~className="") => {
         <p> {React.string("Select a country")} </p>
         <Select
           defaultValue={Country.getValidCountryCode(country)}
-          onChange={((value, label)) => onChange(value)}
+          onChange={((value, _)) => onChange(value)}
           className
           options=data
         />
