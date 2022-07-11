@@ -34,3 +34,12 @@ let getNextOption = (options, currentOpt) => {
 let getPrevOption = (options, currentOpt) => {
   getRelativeToCurrent(options, currentOpt, -1);
 };
+
+let getFirstOption = (options): option(ReactSelectRe.SelectOptions.t) => {
+  My.Array.length(options) == 0 ? None : Some(options[0]);
+};
+
+let getLastOption = (options): option(ReactSelectRe.SelectOptions.t) => {
+  let len = My.Array.length(options);
+  len == 0 ? None : Some(options[len - 1]);
+};
