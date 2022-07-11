@@ -90,7 +90,11 @@ let make =
       isOpen
       target={
         <Button
-          grabFocus=true isOpen onClick={_ => setIsOpen(a => !a)} onKeyDown>
+          ariaKeyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight Home End"
+          grabFocus=true
+          isOpen
+          onClick={_ => setIsOpen(a => !a)}
+          onKeyDown>
           {switch (opt) {
            | Some((c: ReactSelectRe.SelectOptions.t)) =>
              React.string(c.label)

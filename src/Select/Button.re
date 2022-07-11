@@ -21,13 +21,15 @@ let useGrabFocus = (grabFocus, isOpen) => {
 };
 
 [@react.component]
-let make = (~children, ~grabFocus, ~isOpen, ~onClick, ~onKeyDown) => {
+let make =
+    (~ariaKeyshortcuts, ~children, ~grabFocus, ~isOpen, ~onClick, ~onKeyDown) => {
   let btnRef = useGrabFocus(grabFocus, isOpen);
 
   <button
     className="mls-select-button"
     onClick
     onKeyDown
+    ariaKeyshortcuts
     ref={ReactDOM.Ref.domRef(btnRef)}>
     <span className="btn-label"> children </span>
     <svg
