@@ -1,6 +1,27 @@
-$color-0: #afa7a0;
-$color-1: #222;
-$color-2: #e0e0e0;
+$text-color: #373737;
+$caret-color: $text-color;
+$placeholder-color: #b0b0b0;
+$border-color: #d0d0d0;
+$shadow-color: #d0d0d0;
+$bg-hover-color-light: #f9f9f9;
+$bg-hover-color: #f0f0f0;
+$bg-disabled: #e7e7e7;
+$list-item-color: $text-color;
+$list-item-color-disabled: #a0a0a0;
+
+$radius-0: 3px;
+
+@mixin hide-scroll-bar {
+    &::-webkit-scrollbar { // Chrome, Safari, Opera
+        display: none;
+    }
+    -ms-overflow-style: none; // IE, Edge */
+    scrollbar-width: none; // Firefox
+}
+
+@mixin box-shadow-1 {
+    box-shadow: 0px 1px 3px 0px $shadow-color;
+}
 
 .custom-class.mls-select-with-auto-complete {
     button.mls-select-button {
@@ -10,10 +31,10 @@ $color-2: #e0e0e0;
         svg.btn-icon {
             margin-left: 0.6rem;
             width: 8px;
-            fill: $color-1;
+            fill: $caret-color;
         }
-        color: $color-1;
-        border-color: $color-0;
+        color: $text-color;
+        border-color: $border-color;
         border-style: solid;
         border-width: 1px;
         border-radius: 0.25rem;
@@ -22,14 +43,30 @@ $color-2: #e0e0e0;
         margin-bottom: 0.2rem;
         padding: 0.4rem 1rem;
 
+        &:focus,
+        &:active {
+            @include box-shadow-1;
+            box-shadow: 0px 0px 3px 0px $shadow-color;
+            outline: none;
+            border-radius: 0.25rem;
+        }
+
+        &:hover {
+            background-color: $bg-hover-color-light;
+        }
     }
 
-    .mls-react-select {
-        max-width: 28rem;
-    }
-
-    .mls-react-select-__menu {
-        margin-top: 8px
+    
+    // Control area with search bar. It also contains a down-caret icon by
+    // which our style does not need and is configured to be removed (javascript)
+    
+    .mls-react-select-__control { // contains value-container
+        border-radius: $radius-0 $radius-0 0px 0px;
+        border-width: 1px 1px 1px 1px;
+        border-color: $border-color;
+        &:hover {
+            background-color: $bg-hover-color-light;
+        }
     }
 
     .mls-react-select-__control::before {
@@ -37,15 +74,66 @@ $color-2: #e0e0e0;
         margin-left: 0.7rem;
     }
 
-    .mls-react-select-__placeholder {
-        color: $color-0 ;
+    .mls-react-select-__value-container { //contains placeholder,input-container
     }
-    .mls-react-select-__option {
-        color: $color-1;
+
+    .mls-react-select-__input-container { // contains <input type="text">
+    }
+
+    .mls-react-select-__placeholder { // placeholder (input-container sibling)
+        color: $placeholder-color;
+    }
+
+    // Menu contain list items
+    
+    .mls-react-select {
+        max-width: 28rem;
+    }
+
+    .mls-react-select-__control {
+        @include box-shadow-1;
+        &:focus-within {
+            @include box-shadow-1;
+            
+        }
+    }
+
+    .mls-react-select-__control::before {
+        width: 1.1rem;
+        margin-left: 0.7rem;
+    }
+
+    // menu area containing items in the list
+    .mls-react-select-__menu { // menu contains menu-list
+        margin-top: 0px;
+        border-radius: 0px 0px $radius-0 $radius-0;
+        border-style: solid;
+        border-color: $border-color;
+        border-width: 0px 1px 1px 1px;
+        @include box-shadow-1;
+    }
+
+    .mls-react-select-__menu-list { // menu list contains options
+        border-radius: 0px 0px $radius-0 $radius-0;
+        @include hide-scroll-bar;
+    }
+
+    .mls-react-select-__option { // An option (item) in menu list
+        color: $text-color;
         padding: 6px 10px;
         span.fi {
             margin-right: 0.6rem;
             width: 1.1rem;
         }
+    }
+
+    .mls-react-select-__option--is-selected,
+    .mls-react-select-__option--is-focused {
+        background-color: $bg-hover-color;
+    }
+
+    .mls-react-select-__option--is-disabled {
+        background-color: $bg-disabled;
+        color: $list-item-color-disabled;
     }
 }
