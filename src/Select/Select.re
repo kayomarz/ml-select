@@ -14,6 +14,8 @@ let formatOptionLabel = (r: ReactSelectRe.SelectOptions.t) => {
   </>;
 };
 
+let customMenuList = MenuList.make;
+
 [@react.component]
 let make =
     (
@@ -108,7 +110,7 @@ let make =
         className="mls-react-select"
         classNamePrefix="mls-react-select-"
         components=[%raw
-          {|{DropdownIndicator: null, IndicatorSeparator: null}|}
+          {|{MenuList: customMenuList, DropdownIndicator: null, IndicatorSeparator: null}|}
         ]
         formatOptionLabel
         isLoading=false

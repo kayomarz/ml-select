@@ -1,7 +1,7 @@
 # CountrySelect
 
-This is a *React.js* component which functions like an HTML `<select>` *+* auto
-complete.
+This is a **React.js** component which functions like an HTML `<select>` *+*
+auto complete.
 
 This component is not a production ready library but is an exercise in exploring
 **OCaml** for frontend web development.
@@ -14,9 +14,9 @@ This component is not a production ready library but is an exercise in exploring
         onChange=(country => Js.log(country))
     />
 
-# Using `React-Select` as a base
+# `React-Select` as a base?
 
-Why do we use `React-Select`?
+We use `React-Select` as a base.
 
 ## Component Requirements
 
@@ -24,17 +24,17 @@ Why do we use `React-Select`?
 + Accessability
 + Support popular keyboard shortcuts such as those for the HTML `<select/>`
   element such as:
-  + When focus is on the control but dropdown is not open:
-    `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Home`, `End`
-  + When the dropdown is open:
-    `ArrowUp`, `ArrowDown`, `Enter`, `Esc`
+  + When focus is on the control but dropdown is not open: `ArrowUp`,
+    `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Home`, `End`
+  + When the dropdown is open: `ArrowUp`, `ArrowDown`, `Enter`, `Esc`.
 
 
 ## Approaches
 
-Since the style is totally customized, we have to decide a what to build upon.
+Since the style is totally customized, we have to decide what to build upon.
 
-+ We could create from scratch but this not trivial because:
++ We could create the component from scratch HTML elements such as `<div>` but
+  this not trivial because:
   + Styling is [known to be difficult](https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/#aa-lets-talk-about-select).
   + Making it accessible [is
     important](https://24ways.org/2019/making-a-better-custom-select-element/).
@@ -48,11 +48,11 @@ Since the style is totally customized, we have to decide a what to build upon.
   cross browser manner.
   
 + Hence we use an [react-select](https://react-select.com/home) which is an
-  existing UI library.
+  existing UI library working across browsers.
 
 ## Customizing `react-select`
 
-Following was done to meet the requirements of our component.
+Following `react-select` customizations were done .
 
 ### props
 
@@ -69,10 +69,33 @@ Following was done to meet the requirements of our component.
 
 + `components` To change the appearance of the search bar.
     
-### `react-select` components
+### `react-select` Custom components
+
+The design of `react-select` is broken up in many components. At times an
+application might need to reach into these subcomponents to customize the
+behaviour of these components.
+
+`react-select` allows this via the `components` React.js prop which accepts an
+object whose values are components. However with ReasonReact we cannot pass
+components as properties.
+
+Hence we jump into raw JS. This is a hacky solution but I do not yet know of
+another solution.
+
+    <ReactSelectRe
+       components=[%raw
+          {|{MenuList: customMenuList, DropdownIndicator: null, IndicatorSeparator: null}|}
+        ]
+    />
+
+This is also the reason we need to do a `let customMenuList = MenuList.make`
+in order to be able to access the component via pure JS in the same file.
     
-+ `DropdownIndicator` component replaced to remove the caret icon and hence also the
-  `IndicatorSeparator`.
++ Replace `MenuList` with our custome MenuList. This is done because we want to
+  to render only what is visible rather than rendering all options. Rendering
+  all options tends to be slow which results in a delay displaying menu items.
++ `DropdownIndicator` and `IndicatorSeparator` are removed because we do not
+  require the caret in the control.
 
 # Steps taken to build the compoent
 
@@ -187,8 +210,6 @@ difficult to use Melange later on.
 # Getting started
 
 Choosing ReasonML over ReScript itself took quite a while. Lets get started!
-([Awesome ReasonML](https://github.com/vramana/awesome-reasonml) maybe a good
-place to start.)
 
 ## Design
 

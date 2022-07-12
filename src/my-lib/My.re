@@ -12,6 +12,8 @@ module Array = {
   external findIndex: (array('a), [@bs.uncurry] ('a => bool)) => int =
     "findIndex";
 
+  [@bs.send] external slice: (array('a), int, int) => array('a) = "slice";
+
   [@bs.get] external length: array('a) => int = "length";
 
   /* Add a value to the current index without crossing array limits */
