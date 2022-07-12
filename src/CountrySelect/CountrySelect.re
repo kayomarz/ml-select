@@ -24,9 +24,32 @@ let useFetchData = dataUrl => {
   (data, isLoadingData);
 };
 
+module MsgInvalidCountryCode = {
+  [@react.component]
+  let make = (~currentCountry: option(string)) => {
+    let (isInvalid, invalidCodeString) =
+      CountryDataValidate.identifyInvalidCode(currentCountry);
+
+    if (isInvalid) {
+      CountryDataValidate.warnInvalidCountryCode(invalidCodeString);
+    } else {
+      ();
+    };
+    isInvalid
+      ? <dl className="invalid-iso-country">
+          <dt> {React.string("Invalid ISO country code")} </dt>
+          <dd> {React.string(invalidCodeString)} </dd>
+        </dl>
+      : React.null;
+  };
+};
+
 [@react.component]
 let make = (~country: option(string), ~onChange, ~className="") => {
   let (data, isLoadingData) = useFetchData(Config.countryDataUrl);
+  let (currentCountry, setCurrentCountry) = React.useState(_ => country);
+  let validCountryCode: option(string) =
+    CountryDataValidate.getValidCodeOrNone(country);
 
   isLoadingData
     ? <div className="loading" ariaBusy=true>
@@ -37,10 +60,20 @@ let make = (~country: option(string), ~onChange, ~className="") => {
     : <>
         <p> {React.string("Select a country")} </p>
         <Select
-          defaultValue={Country.getValidCountryCode(country)}
-          onChange={((value, _)) => onChange(value)}
+          defaultValue=validCountryCode
+          onChange={((value, _)) => {
+            setCurrentCountry(_ => Some(value));
+            let (isInvalid, _) =
+              CountryDataValidate.identifyInvalidCode(Some(value));
+            if (!isInvalid) {
+              onChange(value);
+            };
+          }}
           className
           options=data
         />
+        <div className="invalid-iso-country">
+          <MsgInvalidCountryCode currentCountry />
+        </div>
       </>;
 };

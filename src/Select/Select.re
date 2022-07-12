@@ -100,7 +100,7 @@ let make =
           {switch (opt) {
            | Some((c: ReactSelectRe.SelectOptions.t)) =>
              React.string(c.label)
-           | None => React.string("Error: No data") /* Shouldnt occur */
+           | None => {React.string({js|---|js})}
            }}
         </Button>
       }>

@@ -1,5 +1,27 @@
+.invalid-iso-country {
+    color: crimson;
+    dl {
+        display: inline-block;
+        dt, dd {
+            display: inline;
+            margin: 0px;
+            padding: 0px;
+        }
+        dt::after {
+            content: ':'
+        }
+        dd {
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+    }
+}
+
 .mls-select-with-auto-complete {
     button.mls-select-button {
+        .btn-label {
+            min-width: 3rem;
+        }
         svg.btn-icon {
             margin-left: 0.4rem;
             width: 8px;
