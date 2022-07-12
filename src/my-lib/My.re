@@ -1,3 +1,5 @@
+// As practise, write our own bindings where possible.
+
 module String = {
   [@bs.send] external toUpperCase: string => string = "toUpperCase";
   [@bs.send] external toLowerCase: string => string = "toLowerCase";

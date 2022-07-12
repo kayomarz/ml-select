@@ -97,6 +97,21 @@ in order to be able to access the component via pure JS in the same file.
 + `DropdownIndicator` and `IndicatorSeparator` are removed because we do not
   require the caret in the control.
 
+# Questions
+
++ How to extract data from sketch files such as svg, css, font families?
+
++ We try to write our own bindings except for:
+
+  + ReasonReact
+  + Certain standard libraries from Belt and JS
+
++ Although the demo app uses data from a server, the app has a hardcoded copy of
+ [ISO 3166-1-alpha-2 code country](https://www.iso.org/obp/ui/#search/code/) as
+ a source of truth. Data list of (country code + label) will be downloaded from
+ the server because although ISO country codes are the same, labels (human
+ readable country names) may differ.
+
 # Steps taken to build the compoent
 
 The rest of this page is a log of the steps required and decisions made while

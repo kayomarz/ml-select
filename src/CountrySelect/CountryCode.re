@@ -1,3 +1,10 @@
+/* Although data comes from a server, the app has keeps a copy of 
+ * [ISO 3166-1-alpha-2 code country](https://www.iso.org/obp/ui/#search/code/)
+ * 
+ * Data list of (country code + label) will be downloaded from the server
+ * because labels (human readable country names) may differ slightly.
+ */
+
 type code =
   | AF
   | AX
