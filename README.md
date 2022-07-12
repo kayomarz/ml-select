@@ -14,6 +14,35 @@ This component is not a production ready library but is an exercise in exploring
         onChange=(country => Js.log(country))
     />
 
+# TODOS
+
++ Render only visible items.
++ On opening, the meny should scroll to currently selected item.
++ Show only six items.
++ Give a distributable js and instructions how to use it.
++ When the menu is open, keyboard shortcuts PgUp and PgDown should correctly
+  scroll by page.
++ Clicking anywhere else on the page should close the menu.
++ Keyboard Escape button should close the menu even if the button or meny are
+  out of focus.
++ If `country=None` then the keyboard shortcuts do not work with the menu is not
+  yet opened.
++ Extract svg, css, font information from sketch file for more accurate
+  styling.
++ Try writing bindings for React Component.
++ Try and reduce size of build. `flag-icons` is one cause for a large build.
+
+# Questions
+
++ How to extract data from sketch files such as svg, css, font families?
++ As invalid country codes were logged, I realised that the country list has
+  invalid country codes. The current way the component deals with an incorrect
+  contry code is to display it in the list but not fire an onChange event. It
+  also puts out console.warn messages about the incorrect entries received from
+  the server or when an invalid option is selected.
++ Render only visible items: This means that we need to do some extra work for
+  scroll functionality to work and which could take more time.  
+
 # `React-Select` as a base?
 
 We use `React-Select` as a base.
@@ -97,27 +126,12 @@ in order to be able to access the component via pure JS in the same file.
 + `DropdownIndicator` and `IndicatorSeparator` are removed because we do not
   require the caret in the control.
 
-# Questions
-
-+ How to extract data from sketch files such as svg, css, font families?
-
-+ We try to write our own bindings except for:
-
-  + ReasonReact
-  + Certain standard libraries from Belt and JS
-
-+ Although the demo app uses data from a server, the app has a hardcoded copy of
- [ISO 3166-1-alpha-2 code country](https://www.iso.org/obp/ui/#search/code/) as
- a source of truth. Data list of (country code + label) will be downloaded from
- the server because although ISO country codes are the same, labels (human
- readable country names) may differ.
-
 # Steps taken to build the compoent
 
 The rest of this page is a log of the steps required and decisions made while
 developing this component.
 
-## Todos
+## Steps
 
 1. ✓ Explore the ecosystem and language.
 2. ✓ ReasonML in the browser - Use webpack to integrate `ReasonML` with `bsb`.
