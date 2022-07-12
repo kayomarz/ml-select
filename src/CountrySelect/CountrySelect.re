@@ -9,14 +9,13 @@ let useFetchData = dataUrl => {
 
   React.useEffect1(
     () => {
-      /* During dev, emulate a delay to build UI loading messages. */
-      setTimeout(
-        () => {
-          setData(_ => Country.fetchCountries(dataUrl)->parse);
-          setIsLoadingData(_ => false);
-        },
-        2000,
-      );
+      CountryData.fetchCountries(dataUrl)
+      |> Js.Promise.then_(response => {
+           setData(_ => response);
+           setIsLoadingData(_ => false);
+           Js.Promise.resolve(response);
+         })
+      |> ignore;
 
       Some(() => ());
     },
@@ -31,9 +30,9 @@ let make = (~country: option(string), ~onChange, ~className="") => {
 
   isLoadingData
     ? <div className="loading" ariaBusy=true>
-        <p>{React.string("Welcome")}</p>
-        <p ariaHidden=true>{React.string({js|☾˙❀‿❀˙☽|js})}</p>
-        <p>{React.string("Loading...")}</p>
+        <p> {React.string("Welcome")} </p>
+        <p ariaHidden=true> {React.string({js|☾˙❀‿❀˙☽|js})} </p>
+        <p> {React.string("Loading...")} </p>
       </div>
     : <>
         <p> {React.string("Select a country")} </p>
