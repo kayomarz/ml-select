@@ -1,36 +1,35 @@
-let useGrabFocus = (grabFocus, isOpen) => {
-  let refEl = React.useRef(Js.Nullable.null);
+/* This hook makes the button grab focus whenever `isClosed` becomes false.
+ * It also works first time on page load. */
+let useGrabFocus = isClosed => {
+  let (element, setElement) = React.useState(_ => None);
 
-  React.useEffect1(
+  let callbackRef =
+    React.useCallback(node => setElement(_ => Js.Nullable.toOption(node)));
+
+  React.useEffect2(
     () => {
-      if (grabFocus && !Js.Nullable.isNullable(refEl.current) && !isOpen) {
-        /* TODO: This creates a race to grab `focus` because other components
-         * too may contend to get focus. Instead use a top-level application
-         * construct to handle granting of focus.
-         */
-        My.Dom.Element.focus(refEl.current);
-        ();
-      } else {
-        ();
+      switch (isClosed) {
+      | false => ()
+      | true => element->Belt.Option.map(_ => My.Dom.Element.focus(element)) |> ignore
       };
       Some(() => ());
     },
-    [|isOpen, grabFocus|],
+    (isClosed, element),
   );
-  refEl;
+
+  callbackRef;
 };
 
 [@react.component]
-let make =
-    (~ariaKeyshortcuts, ~children, ~grabFocus, ~isOpen, ~onClick, ~onKeyDown) => {
-  let btnRef = useGrabFocus(grabFocus, isOpen);
+let make = (~ariaKeyshortcuts, ~children, ~isClosed, ~onClick, ~onKeyDown) => {
+  let callbackRef = useGrabFocus(isClosed);
 
   <button
     className="mls-select-button"
     onClick
     onKeyDown
     ariaKeyshortcuts
-    ref={ReactDOM.Ref.domRef(btnRef)}>
+    ref={ReactDOM.Ref.callbackDomRef(callbackRef)}>
     <span className="btn-label"> children </span>
     <svg
       className="btn-icon"

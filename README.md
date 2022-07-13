@@ -382,6 +382,16 @@ describes tests for ReasonML bindings using
 [@glennsl/bs-jest](https://github.com/glennsl/rescript-jest/tree/v0.3.2) which
 is marked as experimental. It's not yet clear how to write tests.
 
+# Things to research
+
++ [@bs] As an example, [see
+  React.re](https://github.com/reasonml/reason-react/blob/2fa1bc264569bb39dfab90914ca6a26f78dfeb9d/src/React.re#L218)
++ Promise.resolve(1)
+
+        Promise.resolve(1)
+          |> Js.Promise.then_(fn) 
+
+
 # Links
 
 ## Links - language

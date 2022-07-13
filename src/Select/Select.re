@@ -88,8 +88,7 @@ let make =
       target={
         <Button
           ariaKeyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight Home End"
-          grabFocus=true
-          isOpen
+          isClosed={!isOpen}
           onClick={_ => setIsOpen(a => !a)}
           onKeyDown>
           {switch (opt) {
