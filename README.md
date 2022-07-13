@@ -3,7 +3,7 @@
 This is a **React.js** component which functions like an HTML `<select>` *+*
 auto complete.
 
-This component is not a production ready library but is an exercise in exploring
+This is not a production ready component. It is an exercise in exploring
 **OCaml** for frontend web development.
 
 # Usage
@@ -14,34 +14,33 @@ This component is not a production ready library but is an exercise in exploring
         onChange=(country => Js.log(country))
     />
 
-# TODOS
+# Todos
 
-+ Render only visible items.
-+ On opening, the meny should scroll to currently selected item.
-+ Show only six items.
-+ Give a distributable js and instructions how to use it.
-+ When the menu is open, keyboard shortcuts PgUp and PgDown should correctly
-  scroll by page.
-+ Clicking anywhere else on the page should close the menu.
-+ Keyboard Escape button should close the menu even if the button or meny are
-  out of focus.
-+ If `country=None` then the keyboard shortcuts do not work with the menu is not
-  yet opened.
-+ Extract svg, css, font information from sketch file for more accurate
-  styling.
+Things remaining to be done.
+
++ Render only visible items to avoid a delay in opening the menu.
+  Related.
+  - On menu-open, the list should scroll to the current item.
+  - Show only six menu items.
+  - When the menu is open, keyboard PgUp and PgDown should scroll the correct
+    number of items.
++ When prop `country=None` keyboard shortcuts don't work with collapsed menu.
++ Extract svg, css, font info from sketch file for accurate styling.
 + Try writing bindings for React Component.
-+ Try and reduce size of build. `flag-icons` is one cause for a large build.
++ Move `flag-icons` into separate css file not packaged into the bundle.
++ Try and reduce file size due to `flag-icons`. 
 
 # Questions
 
-+ How to extract data from sketch files such as svg, css, font families?
-+ As invalid country codes were logged, I realised that the country list has
-  invalid country codes. The current way the component deals with an incorrect
-  contry code is to display it in the list but not fire an onChange event. It
-  also puts out console.warn messages about the incorrect entries received from
-  the server or when an invalid option is selected.
-+ Render only visible items: This means that we need to do some extra work for
-  scroll functionality to work and which could take more time.  
++ How can data be extracted from sketch files? (svg, css, font families)
++ Dealing with invalid country code: If the country list contains an invalid
+  country code, ideally we should fix the data rather provide invalid or
+  incomplete data. As data is outside our control, this component logs
+  warning messages to the console when invalid data is received from the
+  server. When an invalid item is selected it again logs a warning, gives a
+  validation message and doesn't invoke the onChange callback.
++ Render only visible items: When we only render visible items, we will need to
+  have some code to ensure scrolling still works.
 
 # `React-Select` as a base?
 
@@ -62,8 +61,8 @@ We use `React-Select` as a base.
 
 Since the style is totally customized, we have to decide what to build upon.
 
-+ We could create the component from scratch HTML elements such as `<div>` but
-  this not trivial because:
++ We could build from scratch using HTML elements such as `<div>` but this not
+  trivial because:
   + Styling is [known to be difficult](https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/#aa-lets-talk-about-select).
   + Making it accessible [is
     important](https://24ways.org/2019/making-a-better-custom-select-element/).
@@ -91,10 +90,7 @@ Following `react-select` customizations were done .
 + `blurInputOnSelect=true` After a selection remove focus from the
   input. Supposed to be handy for dismissing keyboard on touch devices.
   
-+ `className` To control width of `react-select`.
-
-+ `classNamePrefix` To style `react-select` via css to:
-  - Remove the menu list scroll bar
++ `classNamePrefix` To style `react-select` via css.
 
 + `components` To change the appearance of the search bar.
     
@@ -120,67 +116,13 @@ another solution.
 This is also the reason we need to do a `let customMenuList = MenuList.make`
 in order to be able to access the component via pure JS in the same file.
     
-+ Replace `MenuList` with our custome MenuList. This is done because we want to
-  to render only what is visible rather than rendering all options. Rendering
++ We replace `MenuList` with our custome MenuList. This is done because we want
+  to to render only what is visible rather than rendering all options. Rendering
   all options tends to be slow which results in a delay displaying menu items.
 + `DropdownIndicator` and `IndicatorSeparator` are removed because we do not
   require the caret in the control.
 
-# Steps taken to build the compoent
-
-The rest of this page is a log of the steps required and decisions made while
-developing this component.
-
-## Steps
-
-1. ✓ Explore the ecosystem and language.
-2. ✓ ReasonML in the browser - Use webpack to integrate `ReasonML` with `bsb`.
-3. ✓ Explore writing bindings.
-4. ✗ Test for bindings. [This
-   article](https://itnext.io/reasonml-create-bindings-for-npm-package-b8a3c6d0703e#cb5f)
-   describes tests for ReasonML bindings using
-   [@glennsl/bs-jest](https://github.com/glennsl/rescript-jest/tree/v0.3.2)
-   which is marked as experimental. It's not yet clear how to write tests.
-5. Interact with React.js
-   + ✓ Initially use existing bindings and get familiar with ReasonReact.
-   + ✓ Write bindings for basic use of `React-Select` (via npm).
-6. ✓ Interface:
-   `<CountrySelect
-      className="custom-class"
-      country=Some("us")
-      onChange=(country => Js.log(country))
-    />`
-7. Complete the functionality
-   + Write bindings for `react-select` required for this component.
-   + Fetch countries from the server.
-   + ✓ Create a `MlSelect` general component as parent which has the required
-     functionality.
-   + `CountrySelect` will then use `MlSelect`.
-   + ✓ Handle invalid user input. i.e. what if a user types an option which does
-     not exist and hits enter.
-   + ✓ Ensure all keyboard shortcuts work (open/close dropdown, navigate and
-     select options, cancel choice with keyboard)
-   + ✓ The search filter is internal. It filters countries by name without case
-     sensitivity.
-   + Renders only visible options; it is not slow on opening.
-8. Styling
-   + ✓ Explore `Sketch-file` and `flag-icon-css`
-   + ✓ Decide if we can use `scss` or explore what `bs-css` is all about. Is it a
-     de-factor to work with ReasonML?
-   + ✓ Do the styling.
-9. As an exercise on bindings, write our own bindings for the React.js features
-   which we need. i.e. don't use ReasonReact.
-10. ✓ Deploy a live demo of `<CountrySelect/>`
-
-## Aspects to learn
-
-1. Ecosystem and tools.
-2. Language features.
-3. How to write bindings to be able to reuse existing JavaScript library while
-   ensuring type safety in the best possible way.
-4. Coding conventions - See [reasonml-style.pdf (cs.brown.edu)](https://cs.brown.edu/courses/cs017/content/docs/reasonml-style.pdf)
-
-## Choosing between ReScript & ReasonML
+# Choosing between ReScript & ReasonML
 
 **ReScript** seems to have its own syntax deviating from OCaml but has gained a
 lot of traction and seems to have great tooling support.
@@ -191,7 +133,7 @@ the ecosystem and maybe thats not completely true.
 
 Being new to the ecosystem, **ReScript** seems to be the apparent choice.
 
-### Further exploration
+## Further exploration
 
 On further exploration, **ReasonML** seems to be the better choice, at-least for
 this task of exploring OCaml for web development.
@@ -199,7 +141,7 @@ this task of exploring OCaml for web development.
 It took quite a while to figure out the ecosystem but it is an always important
 step to make informed technology decisions.
 
-### Why ReasonML?
+## Why ReasonML?
 
 **ReScript** being young, might continue to veer further towards JavaScript and
 spin off into something different from ReasonML or OCaml. It might indeed become
@@ -235,6 +177,49 @@ mentioned above. However having already started and comfortable with the
 ReasonML and bucklescript tools, we have decided not to explore it yet because
 we also want to make progress and accomplish this task at hand. It should not be
 difficult to use Melange later on.
+
+# Aspects to learn
+
+1. Ecosystem and tools.
+2. Language features.
+3. How to write bindings to be able to reuse existing JavaScript library while
+   ensuring type safety in the best possible way.
+4. Coding conventions - See [reasonml-style.pdf (cs.brown.edu)](https://cs.brown.edu/courses/cs017/content/docs/reasonml-style.pdf)
+
+# Steps taken to build the compoent
+
+The rest of this page is a log of the steps required and decisions made while
+developing this component.
+
+## Specification
+
+1. ✓ Interface:
+   `<CountrySelect
+      className="custom-class"
+      country=Some("us")
+      onChange=(country => Js.log(country))
+    />`
+2. Functionality
+   + ✓ Write bindings for `react-select` required for this component.
+   + ✓ Fetch countries from the server.
+   + ✓ Create a `MlSelect` general component as parent which has the required
+     functionality.
+   + `CountrySelect` will then use `MlSelect`.
+   + ✓ Handle invalid user input. i.e. what if a user types an option which does
+     not exist and hits enter.
+   + ✓ Ensure all keyboard shortcuts work (open/close dropdown, navigate and
+     select options, cancel choice with keyboard)
+   + ✓ The search filter is internal. It filters countries by name without case
+     sensitivity.
+   + Renders only visible options; it is not slow on opening.
+3. Styling
+   + ✓ Explore `Sketch-file` and `flag-icon-css`
+   + ✓ Decide if we can use `scss` or explore what `bs-css` is all about. Is it a
+     de-factor to work with ReasonML?
+   + ✓ Do the styling.
+4. As an exercise on bindings, write our own bindings for the React.js features
+   which we need. i.e. don't use ReasonReact.
+5. ✓ Deploy a live demo of `<CountrySelect/>`
 
 # Getting started
 
@@ -382,76 +367,20 @@ referred to in these documents. This is why `bs-platform` in the
 This way we focus purely on learning and avoid distractions due to changes in
 versions. Once we learn the basics, we can easily ramp up to the latest.
 
-## Revision - ReasonML language 
+## Commands cheatsheet
 
-+ if/else is an expr (returns something) Hence it always needs an else.
-+ the terenary operator also works.
-+ `+` `+.` `++`
-+ "ascii str", 'char', {js|unicode multi-line string|js}, {j|total $total|j}
-+ [%%raw {||}]  [%raw {||}]
-+ -> (pipe-first for data-first) (data-first: good for type inferencing langs)
-+ |> (reverse pipe)
-+ _ pipe placeholder (data-first is inconvenient for partial application)
-+ Punning (dont repeat the value if a var with same name is in scope)
-+ list [1,2,3]  array [|1,2,3|]
-+ labeled args (~arg1, ~arg2) (~arg1 as a1, ~arg2) (~arg1, ~arg2=?, ())
-+ destructuring tuples, records
-+ Instead of default values for fn params, use currying with labeled params.
-+ Invariants, option, Some, None
-
-## Revision - ReasonML bindings
-
-For ReasonML to interact with existing JavaScript libraries we need to write
-bindings in ReasonML for that library.
-
-Hence, writing **bindings turns out to be an important skill to master** in
-order to use existing JavaScript libraries. Bindings should be written to
-leverage the benefits of a type safe system such as OCaml.
-
-+ [@bs.get]
-+ [@bs.module]
-+ [@bs.new]
-+ [@bs.scope]
-+ [@bs.send]
-+ [@bs.val]
-
-## Revision - modules/libraries
-
-+ Belt is the BuckleScript standard library
-+ (Belt.Option.flatMap()) and Belt.Option.map()
-+ Js.log, Js.Math.,Js.String
-
-## Revision - commands
-
-+ bsb -init prj -theme basic-reason
 + bsb -themes
++ bsb -init prj -theme basic-reason
 + bsb -make-world -w
 + bsb -clean-world
 
-# Random notes
+# Tests for bindings
 
-+ js_of_ocaml (existing before BuckleScript) does OCaml bytecode to JavaScript,
-  facilitating use of OCaml libraries.
-+ ReScript does rawlambda to JavaScript generating readable JavaScript.
-+ BuckleScript was initially used to compile either vanilla OCaml or
-  ReasonML to JavaScript. At some point, BuckleScript which was rebranded as
-  ReScript developed its own syntax.
-
-# Editor - VS Code
-
-The ReasonML site suggests the
-[vscode-ocaml-platform](https://github.com/ocamllabs/vscode-ocaml-platform)
-(**VSCode OCaml Platform**) extension for Visual Studio Code.
-
-Prerequisites
-
-Before installing the extension, install:
-
-    opam install ocaml-lsp-server
-    opam install ocamlformat # May not need this, but who knows.
-    
-Next, install the extension.
-
+[This
+article](https://itnext.io/reasonml-create-bindings-for-npm-package-b8a3c6d0703e#cb5f)
+describes tests for ReasonML bindings using
+[@glennsl/bs-jest](https://github.com/glennsl/rescript-jest/tree/v0.3.2) which
+is marked as experimental. It's not yet clear how to write tests.
 
 # Links
 
