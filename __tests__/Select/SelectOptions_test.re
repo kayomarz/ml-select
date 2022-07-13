@@ -1,4 +1,5 @@
 open Jest;
+open ReactSelectRe.SelectOptions;
 
 let _ =
   describe("getLabelForValue", () => {
@@ -53,15 +54,11 @@ let _ =
         expect(
           SelectOptions.getRelativeToCurrent(
             options,
-            {value: "bar", label: "Bar bar"},
+            Some({value: "bar", label: "Bar bar"}),
             1,
           ),
         )
-        |> toEqual(
-             Some(
-               {value: "foo-bar", label: "Foo-Bar foo-bar"}: ReactSelectRe.SelectOptions.t,
-             ),
-           )
+        |> toEqual(Some({value: "foo-bar", label: "Foo-Bar foo-bar"}))
       })
     );
 
@@ -70,15 +67,11 @@ let _ =
         expect(
           SelectOptions.getRelativeToCurrent(
             options,
-            {value: "bar", label: "Bar bar"},
+            Some({value: "bar", label: "Bar bar"}),
             99,
           ),
         )
-        |> toEqual(
-             Some(
-               {value: "foo-bar", label: "Foo-Bar foo-bar"}: ReactSelectRe.SelectOptions.t,
-             ),
-           )
+        |> toEqual(Some({value: "foo-bar", label: "Foo-Bar foo-bar"}))
       })
     );
 
@@ -87,15 +80,11 @@ let _ =
         expect(
           SelectOptions.getRelativeToCurrent(
             options,
-            {value: "bar", label: "Bar bar"},
+            Some({value: "bar", label: "Bar bar"}),
             -1,
           ),
         )
-        |> toEqual(
-             Some(
-               {value: "foo", label: "Foo foo"}: ReactSelectRe.SelectOptions.t,
-             ),
-           )
+        |> toEqual(Some({value: "foo", label: "Foo foo"}))
       })
     );
 
@@ -104,15 +93,11 @@ let _ =
         expect(
           SelectOptions.getRelativeToCurrent(
             options,
-            {value: "bar", label: "Bar bar"},
+            Some({value: "bar", label: "Bar bar"}),
             -99,
           ),
         )
-        |> toEqual(
-             Some(
-               {value: "foo", label: "Foo foo"}: ReactSelectRe.SelectOptions.t,
-             ),
-           )
+        |> toEqual(Some({value: "foo", label: "Foo foo"}))
       })
     );
   });

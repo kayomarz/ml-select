@@ -20,11 +20,17 @@ let getOptionIndex =
 };
 
 let getRelativeToCurrent =
-    (options, currentOpt: ReactSelectRe.SelectOptions.t, relativeIndex: int)
+    (
+      options,
+      currentOpt: option(ReactSelectRe.SelectOptions.t),
+      relativeIndex: int,
+    )
     : option(ReactSelectRe.SelectOptions.t) => {
-  getOptionIndex(options, currentOpt.value)
-  ->Belt.Option.flatMap(My.Array.addIndex(options, _, relativeIndex))
-  ->Belt.Option.map(i => options[i]);
+  currentOpt
+    ->Belt.Option.map(opt => opt.value)
+    ->Belt.Option.flatMap(strValue => getOptionIndex(options, strValue))
+    ->Belt.Option.flatMap(My.Array.addIndex(options, _, relativeIndex))
+    ->Belt.Option.map(i => options[i]);
 };
 
 let getNextOption = (options, currentOpt) => {
@@ -42,4 +48,17 @@ let getFirstOption = (options): option(ReactSelectRe.SelectOptions.t) => {
 let getLastOption = (options): option(ReactSelectRe.SelectOptions.t) => {
   let len = My.Array.length(options);
   len == 0 ? None : Some(options[len - 1]);
+};
+
+let mkFunctions = options => {
+  let getNext = getNextOption(options);
+  let getPrev = getPrevOption(options);
+  let getFirst = () => getFirstOption(options);
+  let getLast = () => getLastOption(options);
+  let getOptionWithValue =
+      (str: option(string)): option(ReactSelectRe.SelectOptions.t) => {
+    str->Belt.Option.flatMap(findItemWithValue(options));
+  };
+
+  (getNext, getPrev, getFirst, getLast, getOptionWithValue);
 };
