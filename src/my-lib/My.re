@@ -1,11 +1,14 @@
-// As practise, write our own bindings where possible.
-
 module String = {
+  // As practise, write our own bindings where possible.
+
   [@bs.send] external toUpperCase: string => string = "toUpperCase";
+
   [@bs.send] external toLowerCase: string => string = "toLowerCase";
 };
 
 module Array = {
+  // As practise, write our own bindings where possible.
+
   [@bs.send]
   external filter: (array('a), [@bs.uncurry] ('a => bool)) => array('a) =
     "filter";
@@ -34,16 +37,12 @@ module Array = {
       };
     };
   };
-  /* let getRelativeToCurrent = */
-  /*   (options, currentOpt: ReactSelectRe.SelectOptions.t, relativeIndex: int) => { */
-  /*   adMy.Array.findIndex(options, opt.value) */
-  /* }; */
 };
 
 module Dom = {
-  // As practise, write our own bindings where possible.
-
   module Element = {
+    // As practise, write our own bindings where possible.
+
     [@bs.send] external focus: 'a => unit = "focus";
   };
 };
