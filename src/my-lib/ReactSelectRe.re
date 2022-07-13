@@ -17,7 +17,6 @@ external make:
     ~isLoading: bool,
     ~menuIsOpen: bool,
     ~onChange: SelectOptions.t => unit,
-    ~onKeyDown: 'ev => unit,
     ~options: array(SelectOptions.t),
     ~placeholder: string
   ) =>

@@ -33,13 +33,6 @@ let make =
       )
     });
 
-  let closeOnEscape = e =>
-    if (e##key == "Escape") {
-      setIsOpen(_ => false);
-    } else {
-      ();
-    };
-
   let onSelectChange: ReactSelectRe.SelectOptions.t => unit =
     e => {
       setIsOpen(_ => false);
@@ -87,6 +80,8 @@ let make =
     };
   };
 
+  My.Window.useEventKeyEscape(() => setIsOpen(_ => false));
+
   <div className={j|$className mls-select-with-auto-complete|j}>
     <Dropdown
       isOpen
@@ -100,13 +95,13 @@ let make =
           {switch (opt) {
            | Some((c: ReactSelectRe.SelectOptions.t)) =>
              React.string(c.label)
-           | None => {React.string({js|---|js})}
+           | None => React.string({js|---|js})
            }}
         </Button>
       }>
       <ReactSelectRe
         autoFocus=true
-        blurInputOnSelect=false
+        blurInputOnSelect=true
         className="mls-react-select"
         classNamePrefix="mls-react-select-"
         components=[%raw
@@ -116,7 +111,6 @@ let make =
         isLoading=false
         menuIsOpen=isOpen
         onChange=onSelectChange
-        onKeyDown=closeOnEscape
         options
         placeholder=[%raw {|"Search"|}]
       />

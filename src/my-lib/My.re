@@ -41,7 +41,39 @@ module Array = {
 };
 
 module Dom = {
+  // As practise, write our own bindings where possible.
+
   module Element = {
     [@bs.send] external focus: 'a => unit = "focus";
+  };
+};
+
+module Window = {
+  // As practise, write our own bindings where possible.
+
+  [@bs.val] external window: 'window = "window";
+
+  [@bs.send]
+  external addEventListener: ('window, string, 'event => unit) => unit =
+    "addEventListener";
+
+  [@bs.send]
+  external removeEventListener: ('window, string, 'event => unit) => unit =
+    "removeEventListener";
+
+  let useEventKeyEscape = (onEvent: unit => unit) => {
+    let listener = (e: 'event) => {
+      switch (e##key) {
+      | "Escape" => onEvent()
+      | _ => ()
+      };
+    };
+    React.useEffect1(
+      () => {
+        addEventListener(window, "keydown", listener);
+        Some(() => removeEventListener(window, "keydown", listener));
+      },
+      [||],
+    );
   };
 };
