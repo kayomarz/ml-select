@@ -1,5 +1,5 @@
-/* This hook makes the button grab focus whenever `isClosed` becomes false.
- * It also works first time on page load. */
+/* This hook makes the button grab focus whenever `isClosed` becomes true.
+ * It also makes the button grab focus on page load. */
 let useGrabFocus = isClosed => {
   let (element, setElement) = React.useState(_ => None);
 
