@@ -1,6 +1,6 @@
 open CountryDataValidate;
 open Jest;
-open ReactSelectRe.SelectOptions;
+open TypeOption;
 
 let _ =
   describe("validity of country records (iso country code)", () => {

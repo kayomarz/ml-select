@@ -1,10 +1,3 @@
-module SelectOptions = {
-  type t = {
-    value: string,
-    label: string,
-  };
-};
-
 [@bs.module "react-select"] [@react.component]
 external make:
   (
@@ -13,11 +6,11 @@ external make:
     ~classNamePrefix: string,
     ~className: string,
     ~components: 'components,
-    ~formatOptionLabel: SelectOptions.t => React.element,
+    ~formatOptionLabel: TypeOption.t => React.element,
     ~isLoading: bool,
     ~menuIsOpen: bool,
-    ~onChange: SelectOptions.t => unit,
-    ~options: array(SelectOptions.t),
+    ~onChange: TypeOption.t => unit,
+    ~options: array(TypeOption.t),
     ~placeholder: string
   ) =>
   React.element =

@@ -5,13 +5,12 @@ let isValidCountryCode = (code: string): bool => {
   };
 };
 
-let isInvalidCountryRecord = (record: ReactSelectRe.SelectOptions.t): bool => {
+let isInvalidCountryRecord = (record: TypeOption.t): bool => {
   !isValidCountryCode(record.value);
 };
 
 let detectInvalidCountryRecords =
-    (records: array(ReactSelectRe.SelectOptions.t))
-    : option(array(ReactSelectRe.SelectOptions.t)) => {
+    (records: array(TypeOption.t)): option(array(TypeOption.t)) => {
   let invalidCodes = My.Array.filter(records, isInvalidCountryRecord);
   My.Array.length(invalidCodes) == 0 ? None : Some(invalidCodes);
 };

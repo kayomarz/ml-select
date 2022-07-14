@@ -1,4 +1,4 @@
-open ReactSelectRe.SelectOptions;
+open TypeOption;
 
 module Dropdown = {
   [@react.component]

@@ -1,6 +1,6 @@
 /* On hind sight it would be better to use the term `select tems` instead of
  * `select options`. With ReasonML's `option` we can get lost in terminology. */
-open ReactSelectRe.SelectOptions;
+open TypeOption;
 
 let findItemWithValue = (options, value) => {
   My.Array.filter(options, a => a.value == value)

@@ -1,7 +1,7 @@
 [@bs.val] external setTimeout: (unit => unit, int) => int = "setTimeout";
 
 [@bs.scope "JSON"] [@bs.val]
-external parse: string => array(ReactSelectRe.SelectOptions.t) = "parse";
+external parse: string => array(TypeOption.t) = "parse";
 
 let useFetchData = dataUrl => {
   let (data, setData) = React.useState(() => "[]"->parse);

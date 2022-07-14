@@ -1,9 +1,9 @@
 open Jest;
-open ReactSelectRe.SelectOptions;
+open TypeOption;
 
 let _ =
   describe("getLabelForValue", () => {
-    let options: array(ReactSelectRe.SelectOptions.t) = [|
+    let options = [|
       {value: "foo", label: "Foo foo"},
       {value: "bar", label: "Bar bar"},
       {value: "foo-bar", label: "Foo-Bar foo-bar"},
