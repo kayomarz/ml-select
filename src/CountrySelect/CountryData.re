@@ -11,6 +11,8 @@ let fetchCountries = (url: string): Js.Promise.t(array(TypeOption.t)) => {
   |> Js.Promise.then_(response => fetchResponseJson(response))
   |> Js.Promise.then_(records => {
        CountryDataValidate.warnInvalidCountryRecords(url, records);
+       let len = My.Array.length(records);
+       Js.Console.info({j|$len countries ($url)|j});
        Js.Promise.resolve(records);
      });
 };
