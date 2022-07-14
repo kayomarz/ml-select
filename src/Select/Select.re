@@ -88,6 +88,7 @@ let make =
       <ReactSelectRe
         autoFocus=true
         blurInputOnSelect=true
+        captureMenuScroll=false
         className="mls-react-select"
         classNamePrefix="mls-react-select-"
         components=[%raw

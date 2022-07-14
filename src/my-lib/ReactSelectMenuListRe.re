@@ -7,7 +7,7 @@ external make:
    * `components` prop. */
   (
     ~children: React.element,
-    ~className: {..},
+    ~className: string,
     ~clearValue: {..},
     ~cx: {..},
     ~focusedOption: {..},
@@ -19,7 +19,7 @@ external make:
     ~isMulti: {..},
     ~isRtl: {..},
     ~maxHeight: {..},
-    ~options: {..},
+    ~options: array(TypeOption.t),
     ~selectOption: {..},
     ~selectProps: {..},
     ~setValue: {..},

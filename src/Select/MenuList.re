@@ -1,8 +1,10 @@
+let foo = 0; // fix an editor quirk
+
 [@react.component]
 let make =
     (
       ~children,
-      ~className,
+      ~className: string,
       ~clearValue,
       ~cx,
       ~focusedOption,
@@ -14,7 +16,7 @@ let make =
       ~isMulti,
       ~isRtl,
       ~maxHeight,
-      ~options,
+      ~options: array(TypeOption.t),
       ~selectOption,
       ~selectProps,
       ~setValue,
@@ -39,7 +41,6 @@ let make =
     selectProps
     setValue
     theme>
-     children </ReactSelectMenuListRe>;
-    /* TODO: render only visible items */
-    /* {My.Array.slice(children, 0, 6)->React.array} */
+    <VirtualScroller> children </VirtualScroller>
+  </ReactSelectMenuListRe>;
 };

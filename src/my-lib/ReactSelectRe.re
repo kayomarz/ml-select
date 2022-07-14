@@ -1,8 +1,11 @@
+let foo = 0; // fix an editor quirk
+
 [@bs.module "react-select"] [@react.component]
 external make:
   (
     ~autoFocus: bool,
     ~blurInputOnSelect: bool,
+    ~captureMenuScroll: bool,
     ~classNamePrefix: string,
     ~className: string,
     ~components: 'components,

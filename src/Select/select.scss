@@ -1,3 +1,5 @@
+$menu-list-height: 163px;
+
 .invalid-iso-country {
     dl {
         display: inline-block;
@@ -38,13 +40,33 @@
     }
 
     .mls-react-select-__menu-list {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        height: $menu-list-height;
+        max-height: $menu-list-height;
+        // overflow-y: auto;
+
+        .virtual-scroll-scrollable {
+            height: $menu-list-height;
+            overflow: auto;
+
+            .virtual-scroll-big-container {
+                position: relative;
+
+                .virtual-scroll-option {
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    width: 100%;
+                }
+            }
+        }
     }
 
     .mls-react-select-__input-container { // search box over placeholder
     }
 
     .mls-react-select-__option {
-        padding: 6px 10px;
         span.fi {
             margin-right: 1rem;
             width: 1.5rem;

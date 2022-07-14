@@ -84,15 +84,25 @@ Following `react-select` customizations were done .
 
 ### props
 
+A few props are used for following reasons. Others which are used are self
+explanatory.
+
 + `autoFocus=true` User should be able to directly type and search once once
   `CountrySelect` is opened.
 
 + `blurInputOnSelect=true` After a selection remove focus from the
   input. Supposed to be handy for dismissing keyboard on touch devices.
   
++ `captureMenuScroll=false` We need this to implement MenuList scroll behaviour
+  to render only visible items (virtual scroll) Without this, scrolling with the
+  mouse or keys on our custom MenuList seems to have no effect.
+
++ `~formatOptionLabel` We need this to display the flag icon for each item.
+
 + `classNamePrefix` To style `react-select` via css.
 
 + `components` To change the appearance of the search bar.
+
     
 ### `react-select` Custom components
 
@@ -417,3 +427,4 @@ is marked as experimental. It's not yet clear how to write tests.
   (ReasonML author) 
 + [About bucklescript](https://discuss.ocaml.org/t/about-bucklescript/178)
   (ReasonML author)
++ [fix for a quirk in emacs reason-mode](https://github.com/reasonml-editor/reason-mode/issues/28#issuecomment-359175676)
