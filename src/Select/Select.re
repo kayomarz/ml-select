@@ -1,4 +1,4 @@
-external toOpt: 'a => ReactSelectRe.SelectOptions.t = "%identity";
+open ReactSelectRe.SelectOptions;
 
 module Dropdown = {
   [@react.component]
@@ -6,17 +6,17 @@ module Dropdown = {
     <div> target {isOpen ? <div> children </div> : React.null} </div>;
 };
 
-let formatOptionLabel = (r: ReactSelectRe.SelectOptions.t) => {
-  let flagSuffix = r.value;
+let formatOptionLabel = opt => {
+  let flagSuffix = opt.value;
   <>
     <span className={j|fi fi-$flagSuffix|j} />
-    <span> {React.string(r.label)} </span>
+    <span> {React.string(opt.label)} </span>
   </>;
 };
 
 let customMenuList = MenuList.make;
 
-/* This hook handles state of the currently selection option and provides some 
+/* This hook handles state of the currently selection option and provides some
  * helper functions */
 let useCurrentOption = (options, defaultValue, onOptionChange) => {
   let (getNext, getPrev, getFirst, getLast, getOptionWithValue) =
@@ -28,12 +28,7 @@ let useCurrentOption = (options, defaultValue, onOptionChange) => {
     switch (opt) {
     | Some(newOpt) =>
       setOpt(_ => opt);
-      /* TODO: Use escape hatch `toOpt` to force type coercion. It shouldn't be
-       * needed bu as a newbie, can't figure it out. Without explicit record
-       * type (SelectOptions.t) we get: `record field value can't be found`. On
-       * the other hand type inferencing should work. Need to look into this. */
-      let o = toOpt(newOpt);
-      onOptionChange((o.value, o.label));
+      onOptionChange((newOpt.value, newOpt.label));
       ();
     | None => ()
     };
@@ -49,22 +44,16 @@ let useCurrentOption = (options, defaultValue, onOptionChange) => {
 
 [@react.component]
 let make =
-    (
-      ~className="",
-      ~defaultValue: option(string),
-      ~onChange,
-      ~options: array(ReactSelectRe.SelectOptions.t),
-    ) => {
+    (~className="", ~defaultValue: option(string), ~onChange, ~options) => {
   let (isOpen, setIsOpen) = React.useState(_ => false);
 
   let (opt, setSomeOpt, setNext, setPrev, setFirst, setLast) =
     useCurrentOption(options, defaultValue, onChange);
 
-  let onSelectChange: ReactSelectRe.SelectOptions.t => unit =
-    o => {
-      setIsOpen(_ => false);
-      setSomeOpt(Some(o));
-    };
+  let onSelectChange = opt => {
+    setIsOpen(_ => false);
+    setSomeOpt(Some(opt));
+  };
 
   let onKeyDown = evt => {
     let key = ReactEvent.Keyboard.key(evt);
@@ -91,8 +80,7 @@ let make =
           onClick={_ => setIsOpen(a => !a)}
           onKeyDown>
           {switch (opt) {
-           | Some((c: ReactSelectRe.SelectOptions.t)) =>
-             React.string(c.label)
+           | Some(o) => React.string(o.label)
            | None => React.string({js|---|js})
            }}
         </Button>

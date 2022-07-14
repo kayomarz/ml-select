@@ -1,9 +1,10 @@
-open Jest;
 open CountryDataValidate;
+open Jest;
+open ReactSelectRe.SelectOptions;
 
 let _ =
   describe("validity of country records (iso country code)", () => {
-    let allValid: array(ReactSelectRe.SelectOptions.t) = [|
+    let allValid = [|
       {value: "au", label: "Australia"},
       {value: "in", label: "India"},
       {value: "jp", label: "Japan"},
@@ -11,7 +12,7 @@ let _ =
       {value: "us", label: "United States"},
     |];
 
-    let fewInvalid: array(ReactSelectRe.SelectOptions.t) = [|
+    let fewInvalid = [|
       {value: "au", label: "Australia"},
       {value: "in", label: "India"},
       {value: "jp", label: "Japan"},
@@ -47,7 +48,7 @@ let _ =
 
     Expect.(
       test("detectInvalidCountryRecords - some-invalid", () => {
-        let invalids: array(ReactSelectRe.SelectOptions.t) = [|
+        let invalids = [|
           {value: "aa", label: "Bar"},
           {value: "zz", label: "Baz"},
         |];
@@ -58,8 +59,7 @@ let _ =
 
     Expect.(
       test("detectInvalidCountryRecords - some-invalid", () => {
-        expect(detectInvalidCountryRecords([||]))
-        |> toEqual(None);
+        expect(detectInvalidCountryRecords([||])) |> toEqual(None)
       })
     );
   });
