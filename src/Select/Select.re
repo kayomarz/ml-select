@@ -96,6 +96,8 @@ let make =
         components=[%raw
           {|{MenuList: customMenuList, DropdownIndicator: null, IndicatorSeparator: null}|}
         ]
+        controlShouldRenderValue=false
+        defaultValue={Js.Nullable.fromOption(opt)}
         formatOptionLabel
         isLoading=false
         menuIsOpen=isOpen

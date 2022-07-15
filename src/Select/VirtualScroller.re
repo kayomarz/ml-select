@@ -26,13 +26,22 @@ let toSomeOptions = children => {
   });
 };
 
-let useScrollToFocusedItem = (focusedOption, rowVirtualizer, children) => {
+let useScrollToItem =
+    (rowVirtualizer, children, focusedOption, getValue) => {
   let childrenAsOptions =
     React.useMemo1(() => toSomeOptions(children), [|children|]);
 
+  let someOpt =
+    switch (Js.Nullable.toOption(focusedOption)) {
+    | Some(o) => Some(o)
+    | None =>
+      let focusedOpts = getValue();
+      My.Array.length(focusedOpts) > 0 ? Some(focusedOpts[0]) : None;
+    };
+
   React.useEffect1(
     () => {
-      switch (Js.Nullable.toOption(focusedOption)) {
+      switch (someOpt) {
       | Some(opt) =>
         let i = SelectOptions.getOptionIndex(childrenAsOptions, opt.value);
         rowVirtualizer##scrollToIndex(i);
@@ -40,12 +49,12 @@ let useScrollToFocusedItem = (focusedOption, rowVirtualizer, children) => {
       };
       Some(() => ());
     },
-    [|focusedOption|],
+    [|someOpt|],
   );
 };
 
 [@react.component]
-let make = (~children, ~focusedOption) => {
+let make = (~children, ~focusedOption, ~getValue) => {
   let count = My.Array.length(children);
   let parentRef = React.useRef(Js.Nullable.null);
 
@@ -64,7 +73,7 @@ let make = (~children, ~focusedOption) => {
   let rowVirtualizer = ReactVirtualRe.useVirtualizer(vizParams);
   let totalSize = rowVirtualizer##getTotalSize();
 
-  useScrollToFocusedItem(focusedOption, rowVirtualizer, children);
+  useScrollToItem(rowVirtualizer, children, focusedOption, getValue);
 
   <div
     className="virtual-scroll-scrollable"

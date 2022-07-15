@@ -9,6 +9,8 @@ external make:
     ~classNamePrefix: string,
     ~className: string,
     ~components: 'components,
+    ~controlShouldRenderValue: bool,
+    ~defaultValue: Js.nullable(TypeOption.t),
     ~formatOptionLabel: TypeOption.t => React.element,
     ~isLoading: bool,
     ~menuIsOpen: bool,

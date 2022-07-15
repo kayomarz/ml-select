@@ -12,7 +12,7 @@ external make:
     ~cx: {..},
     ~focusedOption: Js.nullable(TypeOption.t),
     ~getStyles: {..},
-    ~getValue: {..},
+    ~getValue: unit => array(TypeOption.t),
     ~hasValue: {..},
     ~innerProps: {..},
     ~innerRef: {..},
