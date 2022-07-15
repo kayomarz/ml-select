@@ -18,132 +18,24 @@ This is not a production ready component. It is an exercise in exploring
 
 Things remaining to be done.
 
-+ Render only visible items to avoid a delay in opening the menu.
-  Related.
-  - On menu-open, the list should scroll to the current item.
-  - Show only six menu items.
-  - When the menu is open, keyboard PgUp and PgDown should scroll the correct
-    number of items.
-+ When prop `country=None` keyboard shortcuts don't work with collapsed menu.
-+ Extract svg, css, font info from sketch file for accurate styling.
-+ Try writing bindings for React Component.
++ Extract info about font, svg, css from sketch file for accurate styling.
 + Move `flag-icons` into separate css file not packaged into the bundle.
 + Try and reduce file size due to `flag-icons`. 
++ For practise, try writing bindings for React Component.
++ When prop `country=None` keyboard shortcuts don't work with collapsed menu.
 
-# Questions
+# Invalid country data
 
-+ How can data be extracted from sketch files? (svg, css, font families)
 + Dealing with invalid country code: If the country list contains an invalid
   country code, ideally we should fix the data rather provide invalid or
   incomplete data. As data is outside our control, this component logs
   warning messages to the console when invalid data is received from the
   server. When an invalid item is selected it again logs a warning, gives a
   validation message and doesn't invoke the onChange callback.
-+ Render only visible items: When we only render visible items, we will need to
-  have some code to ensure scrolling still works.
 
-# `React-Select` as a base?
+# Coding conventions
 
-We use `React-Select` as a base.
-
-## Component Requirements
-
-+ Totally customized appearance
-+ Accessability
-+ Support popular keyboard shortcuts such as those for the HTML `<select/>`
-  element such as:
-  + When focus is on the control but dropdown is not open: `ArrowUp`,
-    `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Home`, `End`
-  + When the dropdown is open: `ArrowUp`, `ArrowDown`, `Enter`, `Esc`.
-
-
-## Approaches
-
-Since the style is totally customized, we have to decide what to build upon.
-
-+ We could build from scratch using HTML elements such as `<div>` but this not
-  trivial because:
-  + Styling is [known to be difficult](https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/#aa-lets-talk-about-select).
-  + Making it accessible [is
-    important](https://24ways.org/2019/making-a-better-custom-select-element/).
-  + Keyboard shortcuts also need to be implemented from scratch.
-
-+ We could use HTML `<input list="id_of_datalist">` along with a `<datalist>`
-  but this is difficult to style this in a cross browser manner.
-
-+ We could create our own button as the main control and use HTML `<select
-  rows="6">` to let user select items which is also difficult to style in a
-  cross browser manner.
-  
-+ Hence we use an [react-select](https://react-select.com/home) which is an
-  existing UI library working across browsers.
-
-## Customizing `react-select`
-
-Following `react-select` customizations were done .
-
-### props
-
-A few props are used for following reasons. Others which are used are self
-explanatory.
-
-+ `autoFocus=true` User should be able to directly type and search once once
-  `CountrySelect` is opened.
-
-+ `blurInputOnSelect=true` After a selection remove focus from the
-  input. Supposed to be handy for dismissing keyboard on touch devices.
-  
-+ `captureMenuScroll=false` We need this to implement MenuList scroll behaviour
-  to render only visible items (virtual scroll) Without this, scrolling with the
-  mouse or keys on our custom MenuList seems to have no effect.
-
-+ `~formatOptionLabel` We need this to display the flag icon for each item.
-
-+ `classNamePrefix` To style `react-select` via css.
-
-+ `components` To change the appearance of the search bar.
-
-+ `defaultValue` On menu open, we set this option to the current selected
-  value.
-  
-+ `controlShouldRenderValue=false` We set this to false, else the
-  `defaultValue` option causes the search bar also to get polulated by the
-  default value along with any corresponding icon which is shown in the
-  menu list.
-  
-+ `backspaceRemovesValue=false`, `isClearable=false`. The docs state that
-  `controlShouldRenderValue` is disabled, it's recommended to also
-   disable `isClearable` and `backspaceRemovesValue`.
-   See: [react-select.com - Advanced - Experimental](https://react-select.com/advanced#experimental)
-
-    
-### `react-select` Custom components
-
-The design of `react-select` is broken up in many components. At times an
-application might need to reach into these subcomponents to customize the
-behaviour of these components.
-
-`react-select` allows this via the `components` React.js prop which accepts an
-object whose values are components. However with ReasonReact we cannot pass
-components as properties.
-
-Hence we jump into raw JS. This is a hacky solution but I do not yet know of
-another solution.
-
-    <ReactSelectRe
-       components=[%raw
-          {|{MenuList: customMenuList, DropdownIndicator: null, IndicatorSeparator: null}|}
-        ]
-    />
-
-This is also the reason we need to do a `let customMenuList = MenuList.make`
-in order to be able to access the component via pure JS in the same file.
-    
-+ We replace `MenuList` with our custome MenuList. This is done because we want
-  to to render only what is visible rather than rendering all options. Rendering
-  all options tends to be slow which results in a delay displaying menu items.
-+ `DropdownIndicator` and `IndicatorSeparator` are removed because we do not
-  require the caret in the control.
+See [reasonml-style.pdf (cs.brown.edu)](https://cs.brown.edu/courses/cs017/content/docs/reasonml-style.pdf)
 
 # Choosing between ReScript & ReasonML
 
@@ -192,22 +84,15 @@ To each their own.
 
 For this task, lets use **ReasonML** and get a feel of OCaml for frontend dev.
 
+## Melange 
+
 **Update**
 [https://github.com/melange-re/melange](https://github.com/melange-re/melange)
 may have been the more appropriate choice because it [addresses similar
 concerns](https://anmonteiro.com/2021/03/on-ocaml-and-the-js-platform/)
-mentioned above. However having already started and comfortable with the
-ReasonML and bucklescript tools, we have decided not to explore it yet because
-we also want to make progress and accomplish this task at hand. It should not be
-difficult to use Melange later on.
-
-# Aspects to learn
-
-1. Ecosystem and tools.
-2. Language features.
-3. How to write bindings to be able to reuse existing JavaScript library while
-   ensuring type safety in the best possible way.
-4. Coding conventions - See [reasonml-style.pdf (cs.brown.edu)](https://cs.brown.edu/courses/cs017/content/docs/reasonml-style.pdf)
+mentioned above. However having already made significant progress with ReasonML
+and bucklescript tools, we have decided not to explore this later because we
+also want to make progress and accomplish this task at hand.
 
 # Steps taken to build the compoent
 
@@ -234,7 +119,7 @@ developing this component.
      select options, cancel choice with keyboard)
    + ✓ The search filter is internal. It filters countries by name without case
      sensitivity.
-   + Renders only visible options; it is not slow on opening.
+   + ✓ Renders only visible options; it is not slow on opening.
 3. Styling
    + ✓ Explore `Sketch-file` and `flag-icon-css`
    + ✓ Decide if we can use `scss` or explore what `bs-css` is all about. Is it a
@@ -414,6 +299,109 @@ is marked as experimental. It's not yet clear how to write tests.
         Promise.resolve(1)
           |> Js.Promise.then_(fn) 
 
+
+# `React-Select` as a base?
+
+We use `React-Select` as a base.
+
+## Component Requirements
+
++ Totally customized appearance
++ Accessability
++ Support popular keyboard shortcuts such as those for the HTML `<select/>`
+  element such as:
+  + When focus is on the control but dropdown is not open: `ArrowUp`,
+    `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Home`, `End`
+  + When the dropdown is open: `ArrowUp`, `ArrowDown`, `Enter`, `Esc`.
+
+
+## Approaches
+
+Since the style is totally customized, we have to decide what to build upon.
+
++ We could build from scratch using HTML elements such as `<div>` but this not
+  trivial because:
+  + Styling is [known to be difficult](https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/#aa-lets-talk-about-select).
+  + Making it accessible [is
+    important](https://24ways.org/2019/making-a-better-custom-select-element/).
+  + Keyboard shortcuts also need to be implemented from scratch.
+
++ We could use HTML `<input list="id_of_datalist">` along with a `<datalist>`
+  but this is difficult to style this in a cross browser manner.
+
++ We could create our own button as the main control and use HTML `<select
+  rows="6">` to let user select items which is also difficult to style in a
+  cross browser manner.
+  
++ Hence we use an [react-select](https://react-select.com/home) which is an
+  existing UI library working across browsers.
+
+## Customizing `react-select`
+
+Following `react-select` customizations were done .
+
+### props
+
+A few props are used for following reasons. Others which are used are self
+explanatory.
+
++ `autoFocus=true` User should be able to directly type and search once once
+  `CountrySelect` is opened.
+
++ `blurInputOnSelect=true` After a selection remove focus from the
+  input. Supposed to be handy for dismissing keyboard on touch devices.
+  
++ `captureMenuScroll=false` We need this to implement MenuList scroll behaviour
+  to render only visible items (virtual scroll) Without this, scrolling with the
+  mouse or keys on our custom MenuList seems to have no effect.
+
++ `~formatOptionLabel` We need this to display the flag icon for each item.
+
++ `classNamePrefix` To style `react-select` via css.
+
++ `components` To change the appearance of the search bar.
+
++ `defaultValue` On menu open, we set this option to the current selected
+  value.
+  
++ `controlShouldRenderValue=false` We set this to false, else the
+  `defaultValue` option causes the search bar also to get polulated by the
+  default value along with any corresponding icon which is shown in the
+  menu list.
+  
++ `backspaceRemovesValue=false`, `isClearable=false`. The docs state that
+  `controlShouldRenderValue` is disabled, it's recommended to also
+   disable `isClearable` and `backspaceRemovesValue`.
+   See: [react-select.com - Advanced - Experimental](https://react-select.com/advanced#experimental)
+
+    
+### `react-select` Custom components
+
+The design of `react-select` is broken up in many components. At times an
+application might need to reach into these subcomponents to customize the
+behaviour of these components.
+
+`react-select` allows this via the `components` React.js prop which accepts an
+object whose values are components. However with ReasonReact we cannot pass
+components as properties.
+
+Hence we jump into raw JS. This is a hacky solution but I do not yet know of
+another solution.
+
+    <ReactSelectRe
+       components=[%raw
+          {|{MenuList: customMenuList, DropdownIndicator: null, IndicatorSeparator: null}|}
+        ]
+    />
+
+This is also the reason we need to do a `let customMenuList = MenuList.make`
+in order to be able to access the component via pure JS in the same file.
+    
++ We replace `MenuList` with our custome MenuList. This is done because we want
+  to to render only what is visible rather than rendering all options. Rendering
+  all options tends to be slow which results in a delay displaying menu items.
++ `DropdownIndicator` and `IndicatorSeparator` are removed because we do not
+  require the caret in the control.
 
 # Links
 
