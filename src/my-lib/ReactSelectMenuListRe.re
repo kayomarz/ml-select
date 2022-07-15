@@ -10,7 +10,7 @@ external make:
     ~className: string,
     ~clearValue: {..},
     ~cx: {..},
-    ~focusedOption: {..},
+    ~focusedOption: Js.nullable(TypeOption.t),
     ~getStyles: {..},
     ~getValue: {..},
     ~hasValue: {..},

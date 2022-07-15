@@ -14,6 +14,10 @@ module Array = {
     "filter";
 
   [@bs.send]
+  external map: (array('a), [@bs.uncurry] ('a => 'b)) => array('b) =
+    "map";
+
+  [@bs.send]
   external findIndex: (array('a), [@bs.uncurry] ('a => bool)) => int =
     "findIndex";
 

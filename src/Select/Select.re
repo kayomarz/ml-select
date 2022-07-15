@@ -1,5 +1,7 @@
 open TypeOption;
 
+let pageSize = 6;
+
 module Dropdown = {
   [@react.component]
   let make = (~children, ~isOpen, ~target) =>
@@ -99,6 +101,7 @@ let make =
         menuIsOpen=isOpen
         onChange=onSelectChange
         options
+        pageSize
         placeholder=[%raw {|"Search"|}]
       />
     </Dropdown>

@@ -14,6 +14,7 @@ external make:
     ~menuIsOpen: bool,
     ~onChange: TypeOption.t => unit,
     ~options: array(TypeOption.t),
+    ~pageSize: int,
     ~placeholder: string
   ) =>
   React.element =

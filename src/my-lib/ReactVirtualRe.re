@@ -1,4 +1,4 @@
-/* Bindings for Virtual Scroll library
+/* Bindings for `@tanstack/react-virtual` virtual scroll library
  * https://tanstack.com/virtual/v3
  */
 
@@ -16,6 +16,7 @@ external makeVizParams:
     ~overscan: int,
     ~paddingStart: int,
     ~paddingEnd: int,
+    ~enableSmoothScroll: bool,
     unit
   ) =>
   {..};
