@@ -72,6 +72,13 @@ let make =
 
   My.Window.useEventKeyEscape(() => setIsOpen(_ => false));
 
+  /* https://react-select.com/advanced#experimental
+   * When controlShouldRenderValue is disabled, it's recommended to also
+   * disable isClearable and backspaceRemovesValue.
+   * We set `controlShouldRenderValue` to false so that the search box remains
+   * empty, else the search box gets the same label and even icon as the
+   * default value */
+
   <div className={j|$className mls-select-with-auto-complete|j}>
     <Dropdown
       isOpen
@@ -89,19 +96,23 @@ let make =
       }>
       <ReactSelectRe
         autoFocus=true
+        backspaceRemovesValue=true
         blurInputOnSelect=true
         captureMenuScroll=false
         className="mls-react-select"
         classNamePrefix="mls-react-select-"
+        closeMenuOnSelect=false
         components=[%raw
           {|{MenuList: customMenuList, DropdownIndicator: null, IndicatorSeparator: null}|}
         ]
         controlShouldRenderValue=false
         defaultValue={Js.Nullable.fromOption(opt)}
         formatOptionLabel
+        isClearable=false
         isLoading=false
         menuIsOpen=isOpen
         onChange=onSelectChange
+        openMenuOnFocus=true
         options
         pageSize
         placeholder=[%raw {|"Search"|}]

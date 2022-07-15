@@ -4,17 +4,21 @@ let foo = 0; // fix an editor quirk
 external make:
   (
     ~autoFocus: bool,
+    ~backspaceRemovesValue: bool,
     ~blurInputOnSelect: bool,
     ~captureMenuScroll: bool,
     ~classNamePrefix: string,
     ~className: string,
+    ~closeMenuOnSelect: bool,
     ~components: 'components,
     ~controlShouldRenderValue: bool,
     ~defaultValue: Js.nullable(TypeOption.t),
     ~formatOptionLabel: TypeOption.t => React.element,
+    ~isClearable: bool,
     ~isLoading: bool,
     ~menuIsOpen: bool,
     ~onChange: TypeOption.t => unit,
+    ~openMenuOnFocus: bool,
     ~options: array(TypeOption.t),
     ~pageSize: int,
     ~placeholder: string

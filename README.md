@@ -103,6 +103,19 @@ explanatory.
 
 + `components` To change the appearance of the search bar.
 
++ `defaultValue` On menu open, we set this option to the current selected
+  value.
+  
++ `controlShouldRenderValue=false` We set this to false, else the
+  `defaultValue` option causes the search bar also to get polulated by the
+  default value along with any corresponding icon which is shown in the
+  menu list.
+  
++ `backspaceRemovesValue=false`, `isClearable=false`. The docs state that
+  `controlShouldRenderValue` is disabled, it's recommended to also
+   disable `isClearable` and `backspaceRemovesValue`.
+   See: [react-select.com - Advanced - Experimental](https://react-select.com/advanced#experimental)
+
     
 ### `react-select` Custom components
 
