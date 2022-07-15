@@ -14,6 +14,8 @@ external makeVizParams:
     ~estimateSize: unit => int,
     ~getScrollElement: unit => 'a,
     ~overscan: int,
+    ~paddingStart: int,
+    ~paddingEnd: int,
     unit
   ) =>
   {..};

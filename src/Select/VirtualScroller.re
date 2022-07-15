@@ -1,6 +1,7 @@
 /* Virtual Scroll library: https://tanstack.com/virtual/v3 */
 
 let optionItemHeightPx = 27;
+let paddingTopBottomPx = 4;
 
 [@react.component]
 let make = (~children, ~focusedOption) => {
@@ -22,6 +23,8 @@ let make = (~children, ~focusedOption) => {
       ~getScrollElement=() => parentRef.current,
       ~estimateSize=() => optionItemHeightPx,
       ~overscan=0,
+      ~paddingStart=paddingTopBottomPx,
+      ~paddingEnd=paddingTopBottomPx,
       (),
     );
 
