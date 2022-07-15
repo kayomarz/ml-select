@@ -41,6 +41,6 @@ let make =
     selectProps
     setValue
     theme>
-    <VirtualScroller> children </VirtualScroller>
+    <VirtualScroller focusedOption> children</VirtualScroller>
   </ReactSelectMenuListRe>;
 };

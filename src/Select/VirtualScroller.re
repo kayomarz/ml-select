@@ -3,10 +3,18 @@
 let optionItemHeightPx = 27;
 
 [@react.component]
-let make = (~children) => {
+let make = (~children, ~focusedOption) => {
   let count = My.Array.length(children);
 
   let parentRef = React.useRef(Js.Nullable.null);
+
+  React.useEffect1(
+    () => {
+      Js.log2("******** focusedOption", focusedOption);
+      Some(() => ());
+    },
+    [|focusedOption|],
+  );
 
   let vizParams =
     ReactVirtualRe.makeVizParams(
