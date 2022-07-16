@@ -14,16 +14,6 @@ This is not a production ready component. It is an exercise in exploring
         onChange=(country => Js.log(country))
     />
 
-# Todos
-
-Things remaining to be done.
-
-+ Extract info about font, svg, css from sketch file for accurate styling.
-+ Move `flag-icons` into separate css file not packaged into the bundle.
-+ Try and reduce file size due to `flag-icons`. 
-+ For practise, try writing bindings for React Component.
-+ When prop `country=None` keyboard shortcuts don't work with collapsed menu.
-
 # Invalid country data
 
 + Dealing with invalid country code: If the country list contains an invalid
@@ -91,8 +81,8 @@ For this task, lets use **ReasonML** and get a feel of OCaml for frontend dev.
 may have been the more appropriate choice because it [addresses similar
 concerns](https://anmonteiro.com/2021/03/on-ocaml-and-the-js-platform/)
 mentioned above. However having already made significant progress with ReasonML
-and bucklescript tools, we have decided not to explore this later because we
-also want to make progress and accomplish this task at hand.
+and bucklescript tools, let us explore this later because we also want to make
+progress and accomplish this task at hand.
 
 # Steps taken to build the compoent
 
@@ -402,6 +392,16 @@ in order to be able to access the component via pure JS in the same file.
   all options tends to be slow which results in a delay displaying menu items.
 + `DropdownIndicator` and `IndicatorSeparator` are removed because we do not
   require the caret in the control.
+
+# Todos
+
+Things remaining to be done.
+
++ Extract info about font, svg, css from sketch file for accurate styling.
++ Move `flag-icons` into separate css file not packaged into the bundle.
++ Try and reduce file size due to `flag-icons`. 
++ For practise, try writing bindings for React Component.
++ When prop `country=None` keyboard shortcuts don't work with collapsed menu.
 
 # Links
 
