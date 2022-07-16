@@ -23,6 +23,13 @@ This is not a production ready component. It is an exercise in exploring
   server. When an invalid item is selected it again logs a warning, gives a
   validation message and doesn't invoke the onChange callback.
 
+
+# Packages used
+
++ [react-select](https://github.com/jedwatson/react-select)
++ [flag-icons](https://github.com/lipis/flag-icons)
++ [tanstack/virtual](https://github.com/tanstack/virtual) (virtual scroll)
+
 # Coding conventions
 
 See [reasonml-style.pdf (cs.brown.edu)](https://cs.brown.edu/courses/cs017/content/docs/reasonml-style.pdf)
