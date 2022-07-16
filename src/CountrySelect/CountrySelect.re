@@ -58,8 +58,10 @@ let make = (~country: option(string), ~onChange, ~className="") => {
         <p> {React.string("Loading...")} </p>
       </div>
     : <>
-        <p> {React.string("Select a country")} </p>
+        <div> {React.string("Select a country")} </div>
         <Select
+          ariaLabel="Select country"
+          ariaErrormessage="invalidCountry"
           defaultValue=validCountryCode
           onChange={((value, _)) => {
             setCurrentCountry(_ => Some(value));
@@ -72,7 +74,7 @@ let make = (~country: option(string), ~onChange, ~className="") => {
           className
           options=data
         />
-        <div className="invalid-iso-country">
+        <div id="invalidCountry" className="invalid-iso-country">
           <MsgInvalidCountryCode currentCountry />
         </div>
       </>;

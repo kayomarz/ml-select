@@ -3,6 +3,9 @@ let foo = 0; // fix an editor quirk
 [@bs.module "react-select"] [@react.component]
 external make:
   (
+    ~ariaErrormessage: string,
+    ~ariaLabel: string,
+    ~ariaHaspopup: bool,
     ~autoFocus: bool,
     ~backspaceRemovesValue: bool,
     ~blurInputOnSelect: bool,

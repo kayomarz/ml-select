@@ -26,8 +26,7 @@ let toSomeOptions = children => {
   });
 };
 
-let useScrollToItem =
-    (rowVirtualizer, children, focusedOption, getValue) => {
+let useScrollToItem = (rowVirtualizer, children, focusedOption, getValue) => {
   let childrenAsOptions =
     React.useMemo1(() => toSomeOptions(children), [|children|]);
 
@@ -76,6 +75,7 @@ let make = (~children, ~focusedOption, ~getValue) => {
   useScrollToItem(rowVirtualizer, children, focusedOption, getValue);
 
   <div
+    ariaKeyshortcuts="ArrowUp ArrowDown Enter Escape"
     className="virtual-scroll-scrollable"
     ref={ReactDOM.Ref.domRef(parentRef)}>
     <div

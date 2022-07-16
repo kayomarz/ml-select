@@ -10,7 +10,8 @@ let useGrabFocus = isClosed => {
     () => {
       switch (isClosed) {
       | false => ()
-      | true => element->Belt.Option.map(_ => My.Dom.Element.focus(element)) |> ignore
+      | true =>
+        element->Belt.Option.map(_ => My.Dom.Element.focus(element)) |> ignore
       };
       Some(() => ());
     },
@@ -21,14 +22,26 @@ let useGrabFocus = isClosed => {
 };
 
 [@react.component]
-let make = (~ariaKeyshortcuts, ~children, ~isClosed, ~onClick, ~onKeyDown) => {
+let make =
+    (
+      ~ariaKeyshortcuts,
+      ~ariaLabel,
+      ~children,
+      ~isClosed,
+      ~onClick,
+      ~onKeyDown,
+    ) => {
   let callbackRef = useGrabFocus(isClosed);
 
+  /* aria-haspopup seems to be commented out due to technical reasons
+     https://github.com/reasonml/reason-react/issues/309
+   */
   <button
+    ariaKeyshortcuts
+    ariaLabel
     className="mls-select-button"
     onClick
     onKeyDown
-    ariaKeyshortcuts
     ref={ReactDOM.Ref.callbackDomRef(callbackRef)}>
     <span className="btn-label"> children </span>
     <svg

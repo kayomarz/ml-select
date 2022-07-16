@@ -46,7 +46,14 @@ let useCurrentOption = (options, defaultValue, onOptionChange) => {
 
 [@react.component]
 let make =
-    (~className="", ~defaultValue: option(string), ~onChange, ~options) => {
+    (
+      ~ariaLabel,
+      ~ariaErrormessage,
+      ~className="",
+      ~defaultValue: option(string),
+      ~onChange,
+      ~options,
+    ) => {
   let (isOpen, setIsOpen) = React.useState(_ => false);
 
   let (opt, setSomeOpt, setNext, setPrev, setFirst, setLast) =
@@ -84,7 +91,8 @@ let make =
       isOpen
       target={
         <Button
-          ariaKeyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight Home End"
+          ariaKeyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight Home End Enter"
+          ariaLabel
           isClosed={!isOpen}
           onClick={_ => setIsOpen(a => !a)}
           onKeyDown>
@@ -95,6 +103,9 @@ let make =
         </Button>
       }>
       <ReactSelectRe
+        ariaLabel
+        ariaErrormessage
+        ariaHaspopup=false /* ariaHaspopup should be on the button outside react-select.*/
         autoFocus=true
         backspaceRemovesValue=true
         blurInputOnSelect=true
