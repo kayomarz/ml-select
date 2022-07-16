@@ -54,11 +54,11 @@ let make = (~country: option(string), ~onChange, ~className="") => {
   isLoadingData
     ? <div className="loading" ariaBusy=true>
         <p> {React.string("Welcome")} </p>
-        <p ariaHidden=true> {React.string({js|☾˙❀‿❀˙☽|js})} </p>
+        <small ariaHidden=true> {React.string({js|☾˙❀‿❀˙☽|js})} </small>
         <p> {React.string("Loading...")} </p>
       </div>
     : <>
-        <div> {React.string("Select a country")} </div>
+        <div className="lbl-country"> {React.string("Select a country")} </div>
         <Select
           ariaLabel="Select country"
           ariaErrormessage="invalidCountry"
